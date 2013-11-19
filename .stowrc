@@ -2,3 +2,4 @@
 --ignore \.(svn|git|hg|cvsdarcs).*
 --ignore \..*.swp|.*~|.*.bak
 --ignore (README|LICENSE|TODO|HACKING)(..*)?
+--ignore \.stow.*
