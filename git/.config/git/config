@@ -8,3 +8,7 @@
 	branch = auto
 	diff = auto
 	grep = auto
+
+# push behaviour
+[push]
+	default = simple
