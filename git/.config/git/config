@@ -1,0 +1,10 @@
+# useful git aliases
+[alias]
+	s = status
+
+# turn the colours on
+[color]
+	ui = auto
+	branch = auto
+	diff = auto
+	grep = auto
