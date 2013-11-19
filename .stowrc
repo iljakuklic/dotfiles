@@ -3,3 +3,4 @@
 --ignore \..*.swp|.*~|.*.bak
 --ignore (README|LICENSE|TODO|HACKING)(..*)?
 --ignore \.stow.*
+--no-folding
