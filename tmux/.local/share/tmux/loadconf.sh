@@ -1,7 +1,7 @@
 # Source all config files into a tmux session
 
 DIR=~/.config/tmux
-TMUX="tmux -f ~/.local/share/tmux/empty.conf"
+TMUX="tmux -f /dev/null"
 
 [ -d "$DIR" ] || exit
 
