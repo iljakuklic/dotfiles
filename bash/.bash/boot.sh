@@ -44,3 +44,9 @@ function env-boot {
 	source-dir-ext .env .{local/share,config}/shenv
 }
 
+function shell-boot {
+	env-boot
+	for DIR in "$@"; do
+		source-dir "~/.bash/$DIR"
+	done
+}
