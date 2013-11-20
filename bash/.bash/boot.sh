@@ -41,7 +41,7 @@ function env-include {
 }
 
 function env-boot {
-	source-dir-ext .env .{local/share,config}/shenv
+	source-dir-ext .env ~/.{local/share,config}/shenv
 }
 
 function shell-boot {
