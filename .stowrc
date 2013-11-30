@@ -3,4 +3,5 @@
 --ignore \..*.swp|.*~|.*.bak
 --ignore (README|LICENSE|TODO|HACKING)(..*)?
 --ignore \.stow.*
+--ignore .directory
 --no-folding
