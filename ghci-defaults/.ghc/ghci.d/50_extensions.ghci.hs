@@ -1,7 +1,7 @@
 -- type extensions
-:set -XNoMonomorphismRestriction -XGADTs -XDeriveFunctor
+:seti -XNoMonomorphismRestriction -XGADTs -XDeriveFunctor
 -- syntax extensions
-:set -XViewPatterns -XArrows -XTypeOperators
+:seti -XViewPatterns -XArrows -XTypeOperators
 -- language extensons
-:set -XMonadComprehensions -XTemplateHaskell
+:seti -XMonadComprehensions -XTemplateHaskell
 
