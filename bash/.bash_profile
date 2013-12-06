@@ -1,3 +1,3 @@
 
 source ~/.bash/boot.sh
-shell-boot init login
+shell-boot init interact login

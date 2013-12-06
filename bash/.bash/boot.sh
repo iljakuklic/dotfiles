@@ -5,9 +5,10 @@ function source-dir-ext {
 	shift
 	for DIR in "$@"; do
 		[ -d "$DIR" ] && for SRC in "$DIR/"*"$EXT"; do
-			source "$SRC"
+			[ -r "$SRC" ] && source "$SRC"
 		done
 	done
+	true
 }
 
 function source-dir { source-dir-ext ".sh" "$@"; }
@@ -41,12 +42,12 @@ function env-include {
 }
 
 function env-boot {
-	source-dir-ext .env ~/.{local/share,config}/shenv
+	source-dir-ext .env "$HOME"/.{local/share,config}/shenv
 }
 
 function shell-boot {
 	env-boot
 	for DIR in "$@"; do
-		source-dir "~/.bash/$DIR"
+		source-dir "$HOME"/.bash/"$DIR"
 	done
 }
