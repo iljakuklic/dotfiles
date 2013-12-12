@@ -18,11 +18,11 @@ function __color_sol_cyan   () { echo  "37"; }
 function __color_sol_green  () { echo  "64"; }
 
 function colorSol() {
-	printf '\001\033[38;5;%sm\002' "$(__color_sol_$1)"
+	printf '\\[\033[38;5;%sm\\]' "$(__color_sol_$1)"
 }
 
 function colorReset() {
-	printf '\001\033[m\002'
+	printf '\\[\033[m\\]'
 }
 
 function printSol() {
@@ -32,7 +32,7 @@ function printSol() {
 function prompt_exitstatus() {
    case "$1" in
      0) true ;;
-     *) printSol red "×$1 " ;;
+     *) printf '\001\033[38;5;%sm\002%s\001\033[m\002' $(__color_sol_red) "×$1 " ;;
    esac
 }
 
