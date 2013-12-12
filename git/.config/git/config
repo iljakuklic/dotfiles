@@ -1,6 +1,7 @@
 # useful git aliases
 [alias]
 	s = status
+	graph = log --graph --oneline
 
 # turn the colours on
 [color]
