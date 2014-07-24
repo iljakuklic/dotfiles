@@ -22,13 +22,13 @@ function env-set {
 function env-add {
 	local NAME="$1"
 	shift
-	eval "export '$NAME=\$$NAME:$*'"
+	eval "export \"$NAME=\$$NAME:$*\""
 }
 
 function env-prepend {
 	local NAME="$1"
 	shift
-	eval "export '$NAME=$*:\$$NAME'"
+	eval "export \"$NAME=$*:\$$NAME\""
 }
 
 function env-alias {
