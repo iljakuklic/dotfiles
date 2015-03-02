@@ -15,5 +15,6 @@
 [push]
 	default = simple
 
+# colours
 [include]
 	path = ~/.config/git/colours.conf
