@@ -5,6 +5,6 @@ TMUX="tmux -f /dev/null"
 
 [ -d "$DIR" ] || exit
 
-for CONF in $DIR/*.conf; do
+for CONF in "$DIR"/*.conf; do
 	$TMUX source "$CONF" >/dev/null
 done
