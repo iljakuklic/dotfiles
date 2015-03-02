@@ -2,6 +2,7 @@
 [alias]
 	s = status
 	graph = log --graph --oneline --decorate
+	pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
 
 # turn the colours on
 [color]
