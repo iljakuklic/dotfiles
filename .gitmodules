@@ -10,3 +10,6 @@
 [submodule "vim/.vim/bundle/neocomplete.vim"]
 	path = vim/.vim/bundle/neocomplete.vim
 	url = https://github.com/Shougo/neocomplete.vim.git
+[submodule "vim/.vim/bundle/vim-fugitive"]
+	path = vim/.vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
