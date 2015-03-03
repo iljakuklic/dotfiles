@@ -1,8 +1,14 @@
 # useful git aliases
 [alias]
 	s = status
+	ci = commit -p
+	dc = diff --cached
+	issues = grep -wpni -e redmine -e todo -e fixme -e bug
 	graph = log --graph --oneline --decorate
 	pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
+	checkoutall = !sh -c 'git checkout $1 && git submodule update --recursive' -
+	cloneall = clone --recursive
+	whatsnew = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 
 # turn the colours on
 [color]
