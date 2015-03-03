@@ -12,3 +12,14 @@ set fileencodings=utf-8
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
+
+" search
+set hlsearch
+set smartcase
+set ignorecase
+
+" user interface
+set number
+set scrolloff=3
+set wildmenu
+set wildignore=*.o,*~,*.pyc
