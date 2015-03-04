@@ -8,3 +8,6 @@ let g:easytags_auto_highlight  = 0
 
 " TODO add support for Haskell and other langs
 " docs: https://github.com/xolox/vim-easytags
+
+" Unite config
+nnoremap <leader>f :Unite -start-insert file_rec<CR>
