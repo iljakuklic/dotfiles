@@ -1,3 +1,2 @@
-
-export PATH=~/.cabal/bin:"$PATH"
-
+# add some PATHs
+env-prepend PATH ~/bin
