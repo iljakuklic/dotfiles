@@ -10,4 +10,4 @@ let g:easytags_auto_highlight  = 0
 " docs: https://github.com/xolox/vim-easytags
 
 " Unite config
-nnoremap <leader>f :Unite -start-insert file_rec<CR>
+nnoremap <C-F><C-F> :Unite -start-insert file_rec<CR>
