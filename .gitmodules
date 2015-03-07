@@ -28,3 +28,9 @@
 [submodule "vim/.vim/bundle/unite-vim"]
 	path = vim/.vim/bundle/unite-vim
 	url = https://github.com/Shougo/unite.vim.git
+[submodule "vim/.vim/bundle/neosnippet.vim"]
+	path = vim/.vim/bundle/neosnippet.vim
+	url = https://github.com/Shougo/neosnippet.vim.git
+[submodule "vim/.vim/bundle/neosnippet-snippets"]
+	path = vim/.vim/bundle/neosnippet-snippets
+	url = https://github.com/Shougo/neosnippet-snippets.git
