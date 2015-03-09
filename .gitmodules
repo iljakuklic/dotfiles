@@ -28,3 +28,6 @@
 [submodule "vim/.vim/bundle/neosnippet-snippets"]
 	path = vim/.vim/bundle/neosnippet-snippets
 	url = https://github.com/Shougo/neosnippet-snippets.git
+[submodule "vim/.vim/bundle/vim-surround"]
+	path = vim/.vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround
