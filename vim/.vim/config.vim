@@ -8,6 +8,9 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 
+" regional settings
+set spelllang=en_gb
+
 " tab sizes
 set shiftwidth=4
 set tabstop=4
