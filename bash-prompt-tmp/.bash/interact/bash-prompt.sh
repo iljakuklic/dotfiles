@@ -1,4 +1,8 @@
 
+function colorSet {
+	printf '\001\033[38;5;%sm\002' "$1"
+}
+
 # Solarized color scheme color definitions
 function __color_sol_base03 () { echo "234"; }
 function __color_sol_base02 () { echo "235"; }
@@ -18,24 +22,45 @@ function __color_sol_cyan   () { echo  "37"; }
 function __color_sol_green  () { echo  "64"; }
 
 function colorSol() {
-	printf '\\[\033[38;5;%sm\\]' "$(__color_sol_$1)"
+	colorSet "$(__color_sol_$1)"
 }
 
 function colorReset() {
-	printf '\\[\033[m\\]'
+	printf '\001\033[m\002'
 }
 
 function printSol() {
 	colorSol $1; shift; printf '%s' "$*"; colorReset
 }
 
-function prompt_exitstatus() {
-   case "$1" in
-     0) true ;;
-     *) printf '\001\033[38;5;%sm\002%s\001\033[m\002' $(__color_sol_red) "×$1 " ;;
-   esac
+function prompt_print {
+  # exit status
+  case "$1" in
+    0) true ;;
+    *) printSol red "×$1 " ;;
+  esac
+
+  # user & hostname
+  case "$UID" in
+    0) colorSol red ;;
+    *) colorSol yellow ;;
+  esac
+  printf "$USER@$HOSTNAME "
+
+  # android lunch status
+  printSol base1 "${LUNCH_MENU_CHOICES:+[${LUNCH_MENU_CHOICES:0:12}] }"
+
+  # current directory
+  printSol blue "$(basename "$PWD") "
+
+  # end of prompt
+  colorReset
+  case "$UID" in
+    0) printf '# ' ;;
+    *) printf '$ ' ;;
+  esac
 }
 
 # TODO version control support
 # TODO NOTEs/TODOs support
-PS1=$(printf '$(prompt_exitstatus $?)%s\\u@\\h %s\\W%s \\$ ' $(colorSol yellow) $(colorSol blue) $(colorReset))
+PS1=$(printf '$(prompt_print $?)')
