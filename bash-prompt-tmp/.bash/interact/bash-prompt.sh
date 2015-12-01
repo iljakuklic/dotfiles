@@ -40,6 +40,10 @@ function prompt_print {
     *) printSol red "×$1 " ;;
   esac
 
+  # time
+  colorSol green
+  printf '%s ' $(date '+%H%M')
+
   # user & hostname
   case "$UID" in
     0) colorSol red ;;
