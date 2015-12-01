@@ -49,7 +49,7 @@ function prompt_print {
     0) colorSol red ;;
     *) colorSol yellow ;;
   esac
-  printf "$USER@$HOSTNAME "
+  printf "$USER@$HOSTNAME"
 
   # android lunch status
   printSol base1 "${LUNCH_MENU_CHOICES:+[${LUNCH_MENU_CHOICES:0:12}] }"
