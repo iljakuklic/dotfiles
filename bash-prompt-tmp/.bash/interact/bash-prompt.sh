@@ -55,7 +55,23 @@ function prompt_print {
   printSol base1 "${LUNCH_MENU_CHOICES:+[${LUNCH_MENU_CHOICES:0:12}] }"
 
   # current directory
-  printSol blue "$(basename "$PWD") "
+  local DIR=${PWD##$HOME}
+  if [ "$DIR" != "$PWD" ]; then
+    DIR="~$DIR"
+  fi
+  local -a DIRS SHDIRS
+  IFS=/ read -r -a DIRS <<<"$DIR"
+  for D in "${DIRS[@]:0:$((${#DIRS[@]}-1))}"; do
+    if [ "${#D}" -le 4 ]; then
+      SHDIRS+=("$D")
+    else
+      SHDIRS+=("${D:0:2}")
+    fi
+  done
+  SHDIRS+=("${DIRS[-1]}")
+  colorSol blue
+  printf ' %s' "${SHDIRS[0]}"
+  printf '/%s' "${SHDIRS[@]:1}"
 
   # end of prompt
   colorReset
