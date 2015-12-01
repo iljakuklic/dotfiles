@@ -67,7 +67,7 @@ function prompt_print {
   fi
   local -a DIRS SHDIRS
   IFS=/ read -r -a DIRS <<<"$DIR"
-  for D in "${DIRS[@]:0:$((${#DIRS[@]}-1))}"; do
+  for D in "${DIRS[@]:0:${#DIRS[@]}-1}"; do
     if [ "${#D}" -le 4 ]; then
       SHDIRS+=("$D")
     else
