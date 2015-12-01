@@ -1,3 +1,5 @@
+BAHSPROMPT_DIR=$(realpath $(dirname $BASH_SOURCE))
+source "${BAHSPROMPT_DIR:-.}/git-prompt.sh"
 
 function colorSet {
 	printf '\001\033[38;5;%sm\002' "$1"
@@ -51,8 +53,12 @@ function prompt_print {
   esac
   printf "$USER@$HOSTNAME"
 
+  # devel stuff
+  colorSol violet
   # android lunch status
-  printSol base1 "${LUNCH_MENU_CHOICES:+[${LUNCH_MENU_CHOICES:0:12}] }"
+  printf "${LUNCH_MENU_CHOICES:+ [${LUNCH_MENU_CHOICES:0:12}]}"
+  # git prompt
+  GIT_PS1_SHOWDIRTYSTATE=1 GIT_PS1_SHOWSTASHSTATE=1 GIT_PS1_SHOWUPSTREAM='auto' __git_ps1
 
   # current directory
   local DIR=${PWD##$HOME}
