@@ -67,6 +67,7 @@ function prompt_print {
   fi
   local -a DIRS SHDIRS
   IFS=/ read -r -a DIRS <<<"$DIR"
+  [ '/' == "$DIR" ] && DIRS=("" "")
   for D in "${DIRS[@]:0:${#DIRS[@]}-1}"; do
     if [ "${#D}" -le 4 ]; then
       SHDIRS+=("$D")
@@ -77,7 +78,9 @@ function prompt_print {
   SHDIRS+=("${DIRS[-1]}")
   colorSol blue
   printf ' %s' "${SHDIRS[0]}"
-  printf '/%s' "${SHDIRS[@]:1}"
+  for D in "${SHDIRS[@]:1}"; do
+    printf '/%s' "$D"
+  done
 
   # end of prompt
   colorReset
