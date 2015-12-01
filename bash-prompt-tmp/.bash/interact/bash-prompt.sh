@@ -76,8 +76,8 @@ function prompt_print {
   # end of prompt
   colorReset
   case "$UID" in
-    0) printf '# ' ;;
-    *) printf '$ ' ;;
+    0) printf '\n# ' ;;
+    *) printf '\n$ ' ;;
   esac
 }
 
