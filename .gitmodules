@@ -7,9 +7,6 @@
 [submodule "vim/.vim/bundle/vim-sensible"]
 	path = vim/.vim/bundle/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
-[submodule "vim/.vim/bundle/neocomplete.vim"]
-	path = vim/.vim/bundle/neocomplete.vim
-	url = https://github.com/Shougo/neocomplete.vim.git
 [submodule "vim/.vim/bundle/vim-fugitive"]
 	path = vim/.vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
@@ -22,12 +19,6 @@
 [submodule "vim/.vim/bundle/unite-vim"]
 	path = vim/.vim/bundle/unite-vim
 	url = https://github.com/Shougo/unite.vim.git
-[submodule "vim/.vim/bundle/neosnippet.vim"]
-	path = vim/.vim/bundle/neosnippet.vim
-	url = https://github.com/Shougo/neosnippet.vim.git
-[submodule "vim/.vim/bundle/neosnippet-snippets"]
-	path = vim/.vim/bundle/neosnippet-snippets
-	url = https://github.com/Shougo/neosnippet-snippets.git
 [submodule "vim/.vim/bundle/vim-surround"]
 	path = vim/.vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround
