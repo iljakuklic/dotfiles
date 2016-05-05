@@ -5,3 +5,4 @@
 --ignore \.stow.*
 --ignore .directory
 --no-folding
+-v -R
