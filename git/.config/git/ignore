@@ -1,0 +1,12 @@
+# Backup files
+*~
+*.bak
+.*.swp
+
+# OS-generated junk
+._*
+.Trash*
+.directory
+
+# Local config files
+.ycm_extra_conf.py
