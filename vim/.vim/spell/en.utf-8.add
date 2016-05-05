@@ -5,3 +5,6 @@ libbcc
 LLVM
 RSAddDebugInfoPass
 metadata
+CMake
+Cygwin
+directory
