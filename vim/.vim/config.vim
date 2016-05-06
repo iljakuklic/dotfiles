@@ -26,3 +26,7 @@ set number
 set scrolloff=3
 set wildmenu
 set wildignore=*.o,*~,*.pyc
+
+" YouCompleteMe
+set completeopt-=preview
+let g:ycm_confirm_extra_conf=0
