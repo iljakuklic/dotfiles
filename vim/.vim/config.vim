@@ -2,6 +2,7 @@
 set t_Co=256
 set term=xterm-256color
 set lazyredraw
+set backspace=indent,eol,start
 
 " encoding
 set encoding=utf-8
