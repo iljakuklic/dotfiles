@@ -19,3 +19,6 @@
 [submodule "vim/.vim/bundle/llvm.vim"]
 	path = vim/.vim/bundle/llvm.vim
 	url = https://github.com/Superbil/llvm.vim.git
+[submodule "vim/.vim/bundle/vim-unimpaired"]
+	path = vim/.vim/bundle/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
