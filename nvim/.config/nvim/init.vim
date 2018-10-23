@@ -6,6 +6,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'ajh17/vimcompletesme'
+Plug 'Superbil/llvm.vim'
 call plug#end()
 
 " Auto-completion & IDE-like features settings
