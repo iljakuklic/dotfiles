@@ -9,6 +9,10 @@ Plug 'ajh17/vimcompletesme'
 Plug 'Superbil/llvm.vim'
 call plug#end()
 
+" Some colours
+colorscheme slate
+highlight Search ctermfg=None ctermbg=DarkBlue
+
 " Auto-completion & IDE-like features settings
 set completeopt-=preview
 let g:asyncomplete_smart_completion = 1
