@@ -11,7 +11,7 @@ call plug#end()
 
 " Some colours
 colorscheme slate
-highlight Search ctermfg=None ctermbg=DarkBlue
+highlight Search ctermfg=None ctermbg=DarkGrey
 
 " Auto-completion & IDE-like features settings
 set completeopt-=preview
@@ -35,12 +35,12 @@ highlight link LspInformationText LineNr
 highlight link LspHintText LineNr
 
 " Setup LSP with clangd
-if executable('clangd-6.0')
+if executable('clangd')
     augroup lsp_clangd
         autocmd!
         autocmd User lsp_setup call lsp#register_server({
                     \ 'name': 'clangd',
-                    \ 'cmd': {server_info->['clangd-6.0']},
+                    \ 'cmd': {server_info->['clangd']},
                     \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
                     \ })
     augroup end
