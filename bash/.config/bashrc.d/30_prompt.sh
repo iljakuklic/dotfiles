@@ -66,6 +66,7 @@ function prompt_command {
   local CYELLOW=$'\001\033[0;33m\002'
   local CBYELLOW=$'\001\033[0;1;33m\002'
   local CDYELLOW=$'\001\033[0;2;33m\002'
+  local CBLUE=$'\001\033[0;34m\002'
 
   # Form the command status info
   if [ "$CMDSTATUS" = '' ]; then
@@ -90,7 +91,7 @@ function prompt_command {
   local PS='\w'
 
   # Write it out
-  echo "$CGREY╭╼$DATETIME$STATUS$CMDTIME $CGREY${PS@P}"
+  echo "$CGREY╭╼$DATETIME$STATUS$CMDTIME $CBLUE${PS@P}"
   echo "$CGREY╰┤$CRESET "
 }
 
