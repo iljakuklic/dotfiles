@@ -66,7 +66,8 @@ function prompt_command {
   local CYELLOW=$'\001\033[0;33m\002'
   local CBYELLOW=$'\001\033[0;1;33m\002'
   local CDYELLOW=$'\001\033[0;2;33m\002'
-  local CBLUE=$'\001\033[0;34m\002'
+  local CDCYAN=$'\001\033[0;2;36m\002'
+  local CBCYAN=$'\001\033[0;96m\002'
 
   # Form the command status info
   if [ "$CMDSTATUS" = '' ]; then
@@ -81,23 +82,29 @@ function prompt_command {
   local CMDTIME=''
   if [ ! -z "$LAST_COMMAND_TIME_NS" ]; then
     CMDTIME="     $(fmt_compact_time $LAST_COMMAND_TIME_NS)"
-    CMDTIME=" $CDYELLOW⧖$CYELLOW${CMDTIME:(-6)}"
+    CMDTIME=" $CDYELLOW⌛︎$CYELLOW${CMDTIME:(-6)}"
   fi
 
   # Get date and time
-  local DATETIME=$(date "+ $CDYELLOW%a$CYELLOW%d$CDYELLOW%b $CBYELLOW%H:%M")
+  local DATETIME=$(date "+ $CDYELLOW%a$CYELLOW%d$CDYELLOW%b ⌚︎$CBYELLOW%H:%M")
+
+  # Get info about directory stack depth
+  local DIRDEPTH=''
+  (( "${#DIRSTACK[@]}" > 1 )) && \
+    DIRDEPTH=" $CDCYAN≣$(( ${#DIRSTACK[@]} - 1 ))"
 
   # The usual prompt syntax used here
-  local PS='\w'
+  local PS=" $CBCYAN\\w"
 
   # Write it out
-  echo "$CGREY╭╼$DATETIME$STATUS$CMDTIME $CBLUE${PS@P}"
+  echo "$CGREY╭╼$DATETIME$CMDTIME$STATUS$DIRDEPTH${PS@P}"
   echo "$CGREY╰┤$CRESET "
 }
 
 # Set the whole thing up
 trap 'command_timer_start' DEBUG
 PROMPT_COMMAND="${PROMPT_COMMAND}; command_timer_stop"
+PROMPT_DIRTRIM=4
 PS0=$'\001\033[0m\002'
 PS1='$(prompt_command)'
 PS2='\001\033[0;30m\002 │\001\033[0m\002 '
