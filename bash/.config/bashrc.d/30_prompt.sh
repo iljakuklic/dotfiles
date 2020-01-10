@@ -68,6 +68,8 @@ function prompt_command {
   local CDYELLOW=$'\001\033[0;2;33m\002'
   local CDCYAN=$'\001\033[0;2;36m\002'
   local CBCYAN=$'\001\033[0;96m\002'
+  local CBLINK=$'\001\033[5m\002'
+  local INDICATOR='_▁▂▃▄▅▆▇█'
 
   # Form the command status info
   local STATUS=''
@@ -85,16 +87,39 @@ function prompt_command {
   # Get date and time
   local DATETIME=$(date "+ $CDYELLOW%a$CYELLOW%d$CDYELLOW%b ⌚︎$CBYELLOW%H:%M")
 
+  # Battery status
+  local BATTERY UF BATINFO BATCAP BATSTATUS ENTRY BATIND BATICON
+  for UF in /sys/class/power_supply/BAT?/uevent; do
+    readarray -t BATINFO <"$UF"
+    local CHARGING=false
+    for ENTRY in "${BATINFO[@]}"; do
+      case "$ENTRY" in
+        POWER_SUPPLY_STATUS=Charging) CHARGING=true ;;
+        POWER_SUPPLY_CAPACITY=*) BATCAP="${ENTRY#*=}" ;;
+      esac
+    done
+    BATIND="${INDICATOR:$(( (BATCAP * 8 + 50) / 100 )):1}"
+    $CHARGING && BATICON="$CYELLOW±" || BATICON="$CGREY±"
+    BATCLR="$CDYELLOW"
+    (( BATCAP >= 98 )) && BATCLR="$CYELLOW"
+    (( BATCAP <= 15 )) && BATCLR="$CRED"
+    (( BATCAP <=  5 )) && BATCLR="$CRED$CBLINK"
+    BATTERY="$BATTERY$BATICON$BATCLR$BATIND"
+  done
+  [ -z "$BATTERY" ] || BATTERY=" $BATTERY"
+
   # Get info about directory stack depth
   local DIRDEPTH=''
   (( "${#DIRSTACK[@]}" > 1 )) && \
     DIRDEPTH=" $CDCYAN≣$(( ${#DIRSTACK[@]} - 1 ))"
 
+  # User color
+
   # The usual prompt syntax used here
-  local PS=" $CBCYAN\\w"
+  local PS="$DIRDEPTH $CBCYAN\\w"
 
   # Write it out
-  echo "$CGREY╭╼$DATETIME$CMDTIME$STATUS$DIRDEPTH${PS@P}"
+  echo "$CGREY╭╼$DATETIME$BATTERY$CGREY▕$CMDTIME$STATUS${PS@P}"
   echo "$CGREY╰┤$CRESET "
 }
 
