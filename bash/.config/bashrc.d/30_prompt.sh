@@ -68,6 +68,10 @@ function prompt_command {
   local CDYELLOW=$'\001\033[0;2;33m\002'
   local CDCYAN=$'\001\033[0;2;36m\002'
   local CBCYAN=$'\001\033[0;96m\002'
+  local CBLUE=$'\001\033[0;34m\002'
+  local CDBLUE=$'\001\033[0;2;34m\002'
+  local CBBLUE=$'\001\033[0;94m\002'
+  local CUNDERLINE=$'\001\033[4m\002'
   local CBLINK=$'\001\033[5m\002'
   local INDICATOR='_▁▂▃▄▅▆▇█'
 
@@ -114,12 +118,19 @@ function prompt_command {
     DIRDEPTH=" $CDCYAN≣$(( ${#DIRSTACK[@]} - 1 ))"
 
   # User color
+  local USERCLR="$CBLUE"
+  [ "$EUID" = 0 ] && USERCLR="$CRED$CUNDERLINE"
 
   # The usual prompt syntax used here
-  local PS="$DIRDEPTH $CBCYAN\\w"
+  local PS=" $USERCLR\u$CGREY@$CBLUE\h$DIRDEPTH $CBCYAN\\w"
+
+  # Compile the components together into a few sections
+  local NOWINFO="$DATETIME$BATTERY"
+  local CMDINFO="$CGREY▕$CMDTIME$STATUS"
+  local LOCINFO="$CGREY▕${PS@P}"
 
   # Write it out
-  echo "$CGREY╭╼$DATETIME$BATTERY$CGREY▕$CMDTIME$STATUS${PS@P}"
+  echo "$CGREY╭╼$NOWINFO$CMDINFO$LOCINFO"
   echo "$CGREY╰┤$CRESET "
 }
 
