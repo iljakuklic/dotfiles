@@ -96,7 +96,7 @@ function prompt_command {
 
 # Set the whole thing up
 trap 'command_timer_start' DEBUG
-PROMPT_COMMAND=command_timer_stop
+PROMPT_COMMAND="${PROMPT_COMMAND}; command_timer_stop"
 PS0=$'\001\033[0m\002'
 PS1='$(prompt_command)'
 PS2='\001\033[0;30m\002 │\001\033[0m\002 '
