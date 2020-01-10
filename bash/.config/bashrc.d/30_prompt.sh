@@ -70,11 +70,8 @@ function prompt_command {
   local CBCYAN=$'\001\033[0;96m\002'
 
   # Form the command status info
-  if [ "$CMDSTATUS" = '' ]; then
-    local STATUS=''
-  elif [ "$CMDSTATUS" = 0 ]; then
-    local STATUS=" $CGREEN✓"
-  else
+  local STATUS=''
+  if [ "$CMDSTATUS" != '' ] && [ "$CMDSTATUS" != 0 ]; then
     local STATUS=" $CDRED✗$CRED$CMDSTATUS"
   fi
 
