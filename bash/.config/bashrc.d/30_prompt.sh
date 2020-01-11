@@ -43,12 +43,12 @@ function fmt_compact_time {
 }
 
 function command_timer_start {
-  [ -z "$COMMAND_TIMER_START" ] && COMMAND_TIMER_START=$(date +%s%N)
+  [ -z "$COMMAND_TIMER_START" ] && COMMAND_TIMER_START="${EPOCHREALTIME/./}000"
 }
 
 function command_timer_stop {
   [ -z "$COMMAND_TIMER_START" ] && return 1
-  LAST_COMMAND_TIME_NS="$(($(date +%s%N) - $COMMAND_TIMER_START ))"
+  LAST_COMMAND_TIME_NS="$(( "${EPOCHREALTIME/./}000" - $COMMAND_TIMER_START ))"
   unset COMMAND_TIMER_START
 }
 
