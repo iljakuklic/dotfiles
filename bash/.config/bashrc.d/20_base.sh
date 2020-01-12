@@ -44,6 +44,8 @@ shopt -s cdspell 2> /dev/null
 bind "set completion-ignore-case on"
 # Treat hyphens and underscores as equivalent
 bind "set completion-map-case on"
+# Display matches for ambiguous patterns at first tab press
+bind "set show-all-if-ambiguous on"
 
 # Source the completion scripts
 [ -f '/usr/share/bash-completion/bash_completion' ] \
