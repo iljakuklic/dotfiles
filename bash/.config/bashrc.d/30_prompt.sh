@@ -53,8 +53,7 @@ function command_timer_stop {
 }
 
 function prompt_command {
-  # Capture exit code and running time of the previous command
-  # before it's too late
+  # Capture command exit code before it's too late
   local CMDSTATUS="$?"
 
   # Some colours

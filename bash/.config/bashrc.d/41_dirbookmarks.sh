@@ -1,5 +1,3 @@
-# Useful functions and aliases to enhance cd, pushd/popd and such
-
 # DIRECTORY BOOKMARKS
 
 # Set up directory bookmarks by creating a folder with a bunch of symlinks
