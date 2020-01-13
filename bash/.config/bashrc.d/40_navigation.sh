@@ -8,29 +8,21 @@ if builtin type tree >/dev/null 2>&1; then
   alias llt='tree -hpuD'
 fi
 
-# Create a directory and move there
+# Create a bunch of directories and move to the last one
 function mkcd {
   local CDARGS=()
   local MKDIRARGS=()
-  local ARG
+  local CDDIR='' ARG=''
   for ARG in "$@"; do
     case "$ARG" in
-      -L|-P)
-        CDARGS+=("$ARG")
-        ;;
-      -p|-v|-m*|-Z)
-        MKDIRARGS+=("$ARG")
-        ;;
-      -*)
-        echo "Unknown switch '$ARG'" >&2
-        ;;
-      *)
-        CDARGS+=("$ARG")
-        MKDIRARGS+=("$ARG")
-        ;;
+      -L|-P) CDARGS+=("$ARG") ;;
+      -p|-v|-m*|-Z) MKDIRARGS+=("$ARG") ;;
+      -*) echo "mkcd: Unknown switch '$ARG'" >&2; return 1 ;;
+      *) CDDIR="$ARG"; MKDIRARGS+=("$ARG") ;;
     esac
   done
-  mkdir "${MKDIRARGS[@]}" && cd "${CDARGS[@]}"
+  [ -z "$CDDIR" ] && echo "mkcd: No directory specified" >&2 && return 1
+  mkdir "${MKDIRARGS[@]}" && cd "${CDARGS[@]}" "${CDDIR}"
 }
 
 # Move up the directory hierarchy
