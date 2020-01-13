@@ -64,8 +64,11 @@ function cdup {
   esac
 }
 
+# Alias .. to cdup
+alias ..=cdup
+
 # Completion for cdup
 function _complete_cdup {
   readarray -t COMPREPLY <<<"$(IFS=/ compgen -W "$PWD" -- "$2")"
 }
-complete -F _complete_cdup cdup
+complete -F _complete_cdup cdup ..
