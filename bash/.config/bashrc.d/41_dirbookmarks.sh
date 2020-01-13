@@ -22,7 +22,7 @@ function cdat {
 
   # Main functionality
   case "$1" in
-    -h|-?|--help)
+    -h|--help)
       # Show help
       echo "cdat: Minimalistic directory bookmark manager"
       echo
