@@ -1,5 +1,13 @@
 # Various enhancments to the standard cd and pushd/popd mechanisms.
 
+# ls-like aliases
+alias ll='ls -lhA'
+alias lls='ll -S'
+if builtin type tree >/dev/null 2>&1; then
+  alias lst=tree
+  alias llt='tree -hpuD'
+fi
+
 # Create a directory and move there
 function mkcd {
   local CDARGS=()
