@@ -1,5 +1,8 @@
 # Command prompt
 
+# Try to load the git prompt command.
+[ -f /usr/lib/git-core/git-sh-prompt ] && . /usr/lib/git-core/git-sh-prompt
+
 # Format time compactly to fit in 6 chars.
 # $1 is the time in nanoseconds
 function fmt_compact_time {
@@ -121,15 +124,52 @@ function prompt_command {
   [ "$EUID" = 0 ] && USERCLR="$CRED$CUNDERLINE"
 
   # The usual prompt syntax used here
-  local PS=" $USERCLR\u$CGREY@$CBLUE\h$DIRDEPTH $CBCYAN\\w"
+  local PS=" $USERCLR\\u$CGREY@$CBLUE\\h$DIRDEPTH $CBCYAN\\w"
 
   # Compile the components together into a few sections
   local NOWINFO="$DATETIME$BATTERY"
   local CMDINFO="$CGREY▕$CMDTIME$STATUS"
   local LOCINFO="$CGREY▕${PS@P}"
 
+  # Add the repository information, only git supported for now.
+  local REPOINFO=''
+  if [ "$(type -t __git_ps1)" = 'function' ]; then
+    local GITINFO="$(GIT_PS1_SHOWDIRTYSTATE=1 \
+                     GIT_PS1_SHOWSTASHSTATE=1 \
+                     GIT_PS1_SHOWUPSTREAM=auto \
+                     __git_ps1)"
+    # Post-process the output to get custom colours and symbols.
+    GITINFO="$CDCYAN${GITINFO#' ('}"
+    GITPROGRESS=''
+    while true; do
+      case "$GITINFO" in
+        *'<>') GITINFO="$CRED↕${GITINFO%??}" ;;
+        *'>') GITINFO="$CYELLOW↑${GITINFO%?}" ;;
+        *'<') GITINFO="$CRED↓${GITINFO%?}" ;;
+        *'=') GITINFO="$CGREY∙${GITINFO%?}" ;;
+        *'*') GITINFO="$CDYELLOW★${GITINFO%?}" ;;
+        *'+') GITINFO="$CYELLOW⚑${GITINFO%?}" ;;
+        *'$') GITINFO="$CDCYAN≣${GITINFO%?}" ;;
+        *')'|*' ') GITINFO="${GITINFO%?}" ;;
+        *'|CHERRY-PICKING') GITINFO="$CYELLOW⊕${GITINFO%'|'*}" ;;
+        *'|REVERTING') GITINFO="$CYELLOW↻${GITINFO%'|'*}" ;;
+        *'|REBASE-'[im]|*'|REBASE') GITINFO="$CYELLOW↘${GITINFO%'|'*}" ;;
+        *'|MERGING') GITINFO="$CYELLOW∪${GITINFO%'|'*}" ;;
+        *'|BISECTING') GITINFO="$CYELLOW∤${GITINFO%'|'*}" ;;
+        *'|AM') GITINFO="$CYELLOW✉${GITINFO%'|'*}" ;;
+        *'|AM/REBASE') GITINFO="$CYELLOW✉↘${GITINFO%'|'*}" ;;
+        *'|'*' '*/*)
+          GITPROGRESS="$CDCYAN${INDICATOR:$(( 7 * ${GITINFO##*' '} )):1}"
+          GITINFO="${GITINFO%' '*}"
+          ;;
+        *) break ;;
+      esac
+    done
+    REPOINFO="$CGREY▕ $GITPROGRESS$GITINFO$CGREY"
+  fi
+
   # Write it out
-  echo "$CGREY╭╼$NOWINFO$CMDINFO$LOCINFO"
+  echo "$CGREY╭╼$NOWINFO$CMDINFO$LOCINFO$REPOINFO$REOPINFO"
   echo "$CGREY╰┤$CRESET "
 }
 
