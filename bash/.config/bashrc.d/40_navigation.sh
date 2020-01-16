@@ -35,27 +35,20 @@ function cdup {
       echo '  cdup       - Move to the parent directory'
       echo '  cdup N     - Jump N directories up'
       echo '  cdup DIR   - Jump up to particular directory (prefix is ok)'
+      echo '  cdup --git - Jump up to git top level directory'
       ;;
-    -*)
-      echo "Unknown switch '$1'" >&2
-      return 1
-      ;;
-    '')
-      cd ..
-      ;;
-    0)
-      ;;
-    [1-9]|1[0-9])
-      cd $(printf "../%.0s" `seq $1`)
-      ;;
+    --git) cd "$(git rev-parse --show-toplevel)" ;;
+    -*) echo "Unknown switch '$1'" >&2; return 1 ;;
+    '') cd .. ;;
+    0) ;;
+    [1-9]|1[0-9]) cd $(printf "../%.0s" `seq $1`) ;;
     *)
       local PAT="${1#/}"
       local DIR="$PWD"
       while [ "$DIR" != '' ]; do
-        if [[ "${DIR##*/}/" == "$PAT"* ]]; then
-          cd "$DIR"
-          return 0
-        fi
+        case "${DIR##*/}/" in
+          "$PAT"*) cd "$DIR"; return 0 ;;
+        esac
         DIR="${DIR%/*}"
       done
       echo "Pattern '$PAT' not found in current path" >&2
@@ -69,6 +62,6 @@ alias ..=cdup
 
 # Completion for cdup
 function _complete_cdup {
-  readarray -t COMPREPLY <<<"$(IFS=/ compgen -W "$PWD" -- "$2")"
+  readarray -t COMPREPLY <<<"$(IFS=/ compgen -W "$PWD/--git" -- "$2")"
 }
 complete -F _complete_cdup cdup ..
