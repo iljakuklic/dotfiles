@@ -40,6 +40,7 @@ function cdup {
     --git) cd "$(git rev-parse --show-toplevel)" ;;
     -*) echo "Unknown switch '$1'" >&2; return 1 ;;
     '') cd .. ;;
+    /) cd / ;;
     0) ;;
     [1-9]|1[0-9]) cd $(printf "../%.0s" `seq $1`) ;;
     *)
