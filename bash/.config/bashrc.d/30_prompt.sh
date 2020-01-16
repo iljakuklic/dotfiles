@@ -153,11 +153,11 @@ function prompt_command {
         *')'|*' ') GITINFO="${GITINFO%?}" ;;
         *'|CHERRY-PICKING') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW⊕" ;;
         *'|REVERTING') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW↻" ;;
-        *'|REBASE-'[im]|*'|REBASE') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW↘" ;;
+        *'|REBASE-'[im]|*'|REBASE') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW⏏" ;;
         *'|MERGING') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW∪" ;;
-        *'|BISECTING') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW∤" ;;
+        *'|BISECTING') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW÷" ;;
         *'|AM') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW✉" ;;
-        *'|AM/REBASE') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW✉↘" ;;
+        *'|AM/REBASE') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW✉⏏" ;;
         *'|'*' '*/*)
           PROGRESS="$CDCYAN${INDICATOR:$(( 8 * ${GITINFO##*' '} )):1}"
           GITINFO="${GITINFO%' '*}" ;;
