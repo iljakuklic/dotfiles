@@ -139,33 +139,32 @@ function prompt_command {
                      GIT_PS1_SHOWUPSTREAM=auto \
                      __git_ps1)"
     # Post-process the output to get custom colours and symbols.
-    GITINFO="$CDCYAN${GITINFO#' ('}"
-    GITPROGRESS=''
+    local STASH= UPSTREAM= STATE= PROGRESS= DIRTY="$CGREY○" BRANCH=
     while true; do
       case "$GITINFO" in
-        *'<>') GITINFO="$CRED↕${GITINFO%??}" ;;
-        *'>') GITINFO="$CYELLOW↑${GITINFO%?}" ;;
-        *'<') GITINFO="$CRED↓${GITINFO%?}" ;;
-        *'=') GITINFO="$CGREY∙${GITINFO%?}" ;;
-        *'*') GITINFO="$CDYELLOW★${GITINFO%?}" ;;
-        *'+') GITINFO="$CYELLOW⚑${GITINFO%?}" ;;
-        *'$') GITINFO="$CDCYAN≣${GITINFO%?}" ;;
+        *'<>') GITINFO="${GITINFO%??}"; UPSTREAM="$CRED↕" ;;
+        *'>')  GITINFO="${GITINFO%?}"; UPSTREAM="$CYELLOW↑" ;;
+        *'<')  GITINFO="${GITINFO%?}"; UPSTREAM="$CRED↓" ;;
+        *'=')  GITINFO="${GITINFO%?}"; UPSTREAM="$CGREY∙" ;;
+        *'*+') GITINFO="${GITINFO%?}"; DIRTY="$CYELLOW●" ;;
+        *'*')  GITINFO="${GITINFO%?}"; DIRTY="$CDYELLOW◑" ;;
+        *'+')  GITINFO="${GITINFO%?}"; DIRTY="$CYELLOW◐" ;;
+        *'$')  GITINFO="${GITINFO%?}"; STASH="$CDCYAN≣" ;;
         *')'|*' ') GITINFO="${GITINFO%?}" ;;
-        *'|CHERRY-PICKING') GITINFO="$CYELLOW⊕${GITINFO%'|'*}" ;;
-        *'|REVERTING') GITINFO="$CYELLOW↻${GITINFO%'|'*}" ;;
-        *'|REBASE-'[im]|*'|REBASE') GITINFO="$CYELLOW↘${GITINFO%'|'*}" ;;
-        *'|MERGING') GITINFO="$CYELLOW∪${GITINFO%'|'*}" ;;
-        *'|BISECTING') GITINFO="$CYELLOW∤${GITINFO%'|'*}" ;;
-        *'|AM') GITINFO="$CYELLOW✉${GITINFO%'|'*}" ;;
-        *'|AM/REBASE') GITINFO="$CYELLOW✉↘${GITINFO%'|'*}" ;;
+        *'|CHERRY-PICKING') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW⊕" ;;
+        *'|REVERTING') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW↻" ;;
+        *'|REBASE-'[im]|*'|REBASE') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW↘" ;;
+        *'|MERGING') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW∪" ;;
+        *'|BISECTING') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW∤" ;;
+        *'|AM') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW✉" ;;
+        *'|AM/REBASE') GITINFO="${GITINFO%'|'*}"; STATE="$CYELLOW✉↘" ;;
         *'|'*' '*/*)
-          GITPROGRESS="$CDCYAN${INDICATOR:$(( 7 * ${GITINFO##*' '} )):1}"
-          GITINFO="${GITINFO%' '*}"
-          ;;
-        *) break ;;
+          PROGRESS="$CDCYAN${INDICATOR:$(( 8 * ${GITINFO##*' '} )):1}"
+          GITINFO="${GITINFO%' '*}" ;;
+        *) BRANCH="$CDCYAN${GITINFO#' ('}"; break ;;
       esac
     done
-    REPOINFO="$CGREY▕ $GITPROGRESS$GITINFO$CGREY"
+    REPOINFO="$CGREY▕ $STASH$UPSTREAM$STATE$PROGRESS$DIRTY$BRANCH"
   fi
 
   # Write it out
