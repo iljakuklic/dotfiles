@@ -168,7 +168,7 @@ function prompt_command {
   fi
 
   # Write it out
-  echo "$CGREY╭╼$NOWINFO$CMDINFO$LOCINFO$REPOINFO$REOPINFO"
+  echo "$CGREY╭╼$NOWINFO$CMDINFO$LOCINFO$REPOINFO"
   echo "$CGREY╰┤$CRESET "
 }
 
