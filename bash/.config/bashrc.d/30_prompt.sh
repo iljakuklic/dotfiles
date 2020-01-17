@@ -163,7 +163,16 @@ function prompt_command {
           *'|'*' '*/*)
             PROGRESS="$CDCYAN${INDICATOR:$(( 8 * ${GITINFO##*' '} )):1}"
             GITINFO="${GITINFO%' '*}" ;;
-          *) BRANCH="$CDCYAN${GITINFO#' ('}"; break ;;
+          ' ('*)
+            GITINFO="${GITINFO#??}"
+            case "$GITINFO" in
+              '('*'...')
+                GITINFO="${GITINFO#?}"
+                BRANCH="$CBCYAN⌥$CDCYAN${GITINFO%...}" ;;
+              *) BRANCH="$CDCYAN$GITINFO" ;;
+            esac
+            break ;;
+          *) echo "Unrecognized __git_ps1 output" >&2; break ;;
         esac
       done
       REPOINFO="$CGREY▕ $STASH$UPSTREAM$STATE$PROGRESS$DIRTY$BRANCH"
