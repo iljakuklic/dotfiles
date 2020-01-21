@@ -46,5 +46,14 @@ if executable('clangd')
     augroup end
 endif
 
+" Setup LSP with bash-language-server
+if executable('bash-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'bash-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+        \ 'whitelist': ['sh'],
+        \ })
+endif
+
 " Ctrl-L to clear search highlight
 nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
