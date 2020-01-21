@@ -11,6 +11,21 @@ Useful packages to install:
 * [ripgrep](https://github.com/BurntSushi/ripgrep) fast recursive
   `grep`-like command `rg`
 
+## TODO
+
+* Configure language servers for `nvim`
+  * clang (mostly done)
+  * Haskell
+  * bash
+  * python
+  * rust
+  * erlang?
+  * elixir?
+  * Julia?
+* GHCi
+  * Prompt
+  * Enable some language extensions by default
+
 ## Random notes
 
 Prompt uses some unicode symbols and ANSI sequences, reference:
