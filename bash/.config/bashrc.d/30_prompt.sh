@@ -147,7 +147,7 @@ function prompt_command {
           *'>')  GITINFO="${GITINFO%?}"; UPSTREAM="$CYELLOW↑" ;;
           *'<')  GITINFO="${GITINFO%?}"; UPSTREAM="$CRED↓" ;;
           *'=')  GITINFO="${GITINFO%?}"; UPSTREAM="$CGREY∙" ;;
-          *'*+') GITINFO="${GITINFO%?}"; DIRTY="$CYELLOW●" ;;
+          *'*+') GITINFO="${GITINFO%??}"; DIRTY="$CYELLOW●" ;;
           *'*')  GITINFO="${GITINFO%?}"; DIRTY="$CDYELLOW◑" ;;
           *'+')  GITINFO="${GITINFO%?}"; DIRTY="$CYELLOW◐" ;;
           *'$')  GITINFO="${GITINFO%?}"; STASH="$CDCYAN≣" ;;
