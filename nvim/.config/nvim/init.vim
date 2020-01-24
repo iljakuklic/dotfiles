@@ -56,5 +56,14 @@ if executable('bash-language-server')
         \ })
 endif
 
+" Setup LSP with Haskell ghcide
+if executable('ghcide')
+  au User lsp_setup call lsp#register_server({
+      \ 'name': 'ghcide',
+      \ 'cmd': {server_info->['ghcide', '--lsp']},
+      \ 'whitelist': ['haskell'],
+      \ })
+endif
+
 " Ctrl-L to clear search highlight
 nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
