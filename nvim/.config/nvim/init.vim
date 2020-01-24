@@ -14,11 +14,11 @@ colorscheme slate
 highlight Search ctermfg=None ctermbg=DarkGrey
 
 " Auto-completion & IDE-like features settings
-set completeopt-=preview
+set completeopt+=preview
 let g:asyncomplete_smart_completion = 1
 let g:asyncomplete_auto_popup = 1
 let g:lsp_signs_enabled = 1
-"let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_echo_cursor = 0
 
 " Sign column style
 set signcolumn=yes
@@ -33,6 +33,7 @@ highlight link LspErrorText LineNr
 highlight link LspWarningText LineNr
 highlight link LspInformationText LineNr
 highlight link LspHintText LineNr
+highlight clear LspWarningLine
 
 " Setup LSP with clangd
 if executable('clangd')
