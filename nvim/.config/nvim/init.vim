@@ -26,7 +26,7 @@ let g:lsp_diagnostics_echo_cursor = 0
 
 " Sign column style
 set signcolumn=yes
-highlight clear SignColumn
+au ColorScheme * highlight clear SignColumn
 set number
 " LSP-specific stuff for  sign column
 let g:lsp_signs_error = {'text': '■'}
