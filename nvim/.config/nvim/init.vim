@@ -71,3 +71,5 @@ endif
 
 " Ctrl-L to clear search highlight
 nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
+" Don't block switching from hidden buffers
+set hidden
