@@ -1,5 +1,9 @@
 " Initialise plugins
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-tbone'
+Plug 'tpope/vim-unimpaired'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
