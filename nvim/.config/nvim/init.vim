@@ -39,35 +39,54 @@ highlight link LspInformationText LineNr
 highlight link LspHintText LineNr
 highlight clear LspWarningLine
 
-" Setup LSP with clangd
-if executable('clangd')
-    augroup lsp_clangd
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'clangd',
-                    \ 'cmd': {server_info->['clangd']},
-                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-                    \ })
-    augroup end
-endif
+" Language server protocol setup
+augroup vimrc_lsp_init
 
-" Setup LSP with bash-language-server
-if executable('bash-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'bash-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
-        \ 'whitelist': ['sh'],
-        \ })
-endif
+  " Special settings for LSP-enabled buffers
+  function! s:on_lsp_buffer_enabled() abort
+    " TODO more of these, peek- variants (add or switch to these)
+    nmap <buffer> gd    <Plug>(lsp-declaration)
+    nmap <buffer> K     <Plug>(lsp-hover)
+    nmap <buffer> gD    <Plug>(lsp-definition)
+    nmap <buffer> <c-k> <Plug>(lsp-signature-help)
+    nmap <buffer> 1gD   <Plug>(lsp-type-definition)
+    nmap <buffer> gr    <Plug>(lsp-references)
+    " TODO format range
+    " TODO code action
+    " TODO unimpaired-style mappings (diagnostic, error, ref, warn)
+  endfunction
 
-" Setup LSP with Haskell ghcide
-if executable('ghcide')
-  au User lsp_setup call lsp#register_server({
-      \ 'name': 'ghcide',
-      \ 'cmd': {server_info->['ghcide', '--lsp']},
-      \ 'whitelist': ['haskell'],
-      \ })
-endif
+  au!
+  au User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+
+  " Setup LSP with clangd
+  if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+          \ 'name': 'clangd',
+          \ 'cmd': {server_info->['clangd']},
+          \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+          \ })
+  endif
+
+  " Setup LSP with bash-language-server
+  if executable('bash-language-server')
+    au User lsp_setup call lsp#register_server({
+          \ 'name': 'bash-language-server',
+          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+          \ 'whitelist': ['sh'],
+          \ })
+  endif
+
+  " Setup LSP with Haskell ghcide
+  if executable('ghcide')
+    au User lsp_setup call lsp#register_server({
+          \ 'name': 'ghcide',
+          \ 'cmd': {server_info->['ghcide', '--lsp']},
+          \ 'whitelist': ['haskell'],
+          \ })
+  endif
+
+augroup end
 
 " Ctrl-L to clear search highlight
 nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
