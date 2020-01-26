@@ -71,5 +71,10 @@ endif
 
 " Ctrl-L to clear search highlight
 nnoremap <silent> <C-l> :nohlsearch<CR><C-l>
+" ]w ]W [w [W to move around windows in normal mode
+nnoremap ]w <C-W>w
+nnoremap [w <C-W>W
+nnoremap [W <C-W>t
+nnoremap ]W <C-W>b
 " Don't block switching from hidden buffers
 set hidden
