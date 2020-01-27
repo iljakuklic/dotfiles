@@ -23,6 +23,8 @@ let g:asyncomplete_smart_completion = 1
 let g:asyncomplete_auto_popup = 1
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 0
+let g:lsp_virtual_text_prefix = " ⮜ "
+"let g:lsp_highlight_references_enabled = 1
 
 " Sign column style
 set signcolumn=yes
@@ -44,16 +46,44 @@ augroup vimrc_lsp_init
 
   " Special settings for LSP-enabled buffers
   function! s:on_lsp_buffer_enabled() abort
-    " TODO more of these, peek- variants (add or switch to these)
-    nmap <buffer> gd    <Plug>(lsp-declaration)
+    " LSP actions
     nmap <buffer> K     <Plug>(lsp-hover)
-    nmap <buffer> gD    <Plug>(lsp-definition)
-    nmap <buffer> <c-k> <Plug>(lsp-signature-help)
-    nmap <buffer> 1gD   <Plug>(lsp-type-definition)
-    nmap <buffer> gr    <Plug>(lsp-references)
-    " TODO format range
-    " TODO code action
-    " TODO unimpaired-style mappings (diagnostic, error, ref, warn)
+    nmap <buffer> <F3>h <Plug>(lsp-hover)
+    nmap <buffer> <F3>s <Plug>(lsp-signature-help)
+    nmap <buffer> <F3>r <Plug>(lsp-references)
+    nmap <buffer> <F3>R <Plug>(lsp-rename)
+    nmap <buffer> <F3>a <Plug>(lsp-code-action)
+    nmap <buffer> <F3>d <Plug>(lsp-peek-declaration)
+    nmap <buffer> <F3>D <Plug>(lsp-declaration)
+    nmap <buffer> <F3>f <Plug>(lsp-peek-definition)
+    nmap <buffer> <F3>F <Plug>(lsp-definition)
+    nmap <buffer> <F3>i <Plug>(lsp-peek-implementation)
+    nmap <buffer> <F3>I <Plug>(lsp-implementation)
+    nmap <buffer> <F3>t <Plug>(lsp-peek-type-definition)
+    nmap <buffer> <F3>T <Plug>(lsp-type-definition)
+    nmap <buffer> <F3>y <Plug>(lsp-type-hierarchy)
+    nmap <buffer> <F3>n <Plug>(lsp-workspace-symbol)
+    nmap <buffer> <F3>N <Plug>(lsp-document-symbol)
+    nmap <buffer> <F3>g <Plug>(lsp-document-diagnostics)
+    nmap <buffer> <F3>= <Plug>(lsp-document-format)
+    nmap <buffer> <F3>q <Plug>(lsp-preview-close)
+
+    " Diagnostics navigation
+    nmap <buffer> [k <Plug>(lsp-previous-error)
+    nmap <buffer> ]k <Plug>(lsp-next-error)
+    nmap <buffer> [K <Plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]K <Plug>(lsp-next-diagnostic)
+    nmap <buffer> [r <Plug>(lsp-previous-reference)
+    nmap <buffer> ]r <Plug>(lsp-next-reference)
+
+    " Formatting
+    xmap <buffer> = <Plug>(lsp-document-range-format)
+    nmap <buffer> = <Plug>(lsp-document-range-format)
+
+    " A couple of command shortcuts
+    command Symbol :LspWorkspaceSymbol
+    command Symbols :LspDocumentSymbol
+    command Diagnostics :LspDocumentDiagnostics
   endfunction
 
   au!
@@ -95,5 +125,8 @@ nnoremap ]w <C-W>w
 nnoremap [w <C-W>W
 nnoremap [W <C-W>t
 nnoremap ]W <C-W>b
+" Faster preview window manipulation
+noremap <C-J> <C-W>z
+
 " Don't block switching from hidden buffers
 set hidden
