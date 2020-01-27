@@ -45,47 +45,48 @@ highlight clear LspWarningLine
 " Language server protocol setup
 augroup vimrc_lsp_init
 
+  " LSP keymaps
+  nmap <F3>h <Plug>(lsp-hover)
+  nmap <F3>s <Plug>(lsp-signature-help)
+  nmap <F3>r <Plug>(lsp-references)
+  nmap <F3>R <Plug>(lsp-rename)
+  "nmap <F3>a <Plug>(lsp-code-action)
+  nmap <F3>a :LspCodeAction<CR>
+  nmap <F3>d <Plug>(lsp-peek-declaration)
+  nmap <F3>D <Plug>(lsp-declaration)
+  nmap <F3>f <Plug>(lsp-peek-definition)
+  nmap <F3>F <Plug>(lsp-definition)
+  nmap <F3>i <Plug>(lsp-peek-implementation)
+  nmap <F3>I <Plug>(lsp-implementation)
+  nmap <F3>t <Plug>(lsp-peek-type-definition)
+  nmap <F3>T <Plug>(lsp-type-definition)
+  nmap <F3>y <Plug>(lsp-type-hierarchy)
+  nmap <F3>n <Plug>(lsp-workspace-symbol)
+  nmap <F3>N <Plug>(lsp-document-symbol)
+  nmap <F3>g <Plug>(lsp-document-diagnostics)
+  nmap <F3>= <Plug>(lsp-document-format)
+  nmap <F3>q <Plug>(lsp-preview-close)
+
+  " Diagnostics navigation
+  nmap [k <Plug>(lsp-previous-error)
+  nmap ]k <Plug>(lsp-next-error)
+  nmap [K <Plug>(lsp-previous-diagnostic)
+  nmap ]K <Plug>(lsp-next-diagnostic)
+  nmap [r <Plug>(lsp-previous-reference)
+  nmap ]r <Plug>(lsp-next-reference)
+
+  " A couple of command shortcuts
+  command Symbol :LspWorkspaceSymbol
+  command Symbols :LspDocumentSymbol
+  command Diagnostics :LspDocumentDiagnostics
+
   " Special settings for LSP-enabled buffers
   function! s:on_lsp_buffer_enabled() abort
-    " LSP actions
+    " Override some default vim maps if LSP available
     nmap <buffer> K     <Plug>(lsp-hover)
-    nmap <buffer> <F3>h <Plug>(lsp-hover)
-    nmap <buffer> <F3>s <Plug>(lsp-signature-help)
-    nmap <buffer> <F3>r <Plug>(lsp-references)
-    nmap <buffer> <F3>R <Plug>(lsp-rename)
-    "nmap <buffer> <F3>a <Plug>(lsp-code-action)
-    nmap <buffer> <F3>a :LspCodeAction<CR>
-    nmap <buffer> <F3>d <Plug>(lsp-peek-declaration)
-    nmap <buffer> <F3>D <Plug>(lsp-declaration)
-    nmap <buffer> <F3>f <Plug>(lsp-peek-definition)
-    nmap <buffer> <F3>F <Plug>(lsp-definition)
-    nmap <buffer> <F3>i <Plug>(lsp-peek-implementation)
-    nmap <buffer> <F3>I <Plug>(lsp-implementation)
-    nmap <buffer> <F3>t <Plug>(lsp-peek-type-definition)
-    nmap <buffer> <F3>T <Plug>(lsp-type-definition)
-    nmap <buffer> <F3>y <Plug>(lsp-type-hierarchy)
-    nmap <buffer> <F3>n <Plug>(lsp-workspace-symbol)
-    nmap <buffer> <F3>N <Plug>(lsp-document-symbol)
-    nmap <buffer> <F3>g <Plug>(lsp-document-diagnostics)
-    nmap <buffer> <F3>= <Plug>(lsp-document-format)
-    nmap <buffer> <F3>q <Plug>(lsp-preview-close)
-
-    " Diagnostics navigation
-    nmap <buffer> [k <Plug>(lsp-previous-error)
-    nmap <buffer> ]k <Plug>(lsp-next-error)
-    nmap <buffer> [K <Plug>(lsp-previous-diagnostic)
-    nmap <buffer> ]K <Plug>(lsp-next-diagnostic)
-    nmap <buffer> [r <Plug>(lsp-previous-reference)
-    nmap <buffer> ]r <Plug>(lsp-next-reference)
-
     " Formatting
     xmap <buffer> = <Plug>(lsp-document-range-format)
     nmap <buffer> = <Plug>(lsp-document-range-format)
-
-    " A couple of command shortcuts
-    command Symbol :LspWorkspaceSymbol
-    command Symbols :LspDocumentSymbol
-    command Diagnostics :LspDocumentDiagnostics
   endfunction
 
   au!
