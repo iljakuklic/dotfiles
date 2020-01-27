@@ -10,6 +10,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'ajh17/vimcompletesme'
+Plug 'sjl/gundo.vim'
 Plug 'Superbil/llvm.vim'
 call plug#end()
 
@@ -128,6 +129,8 @@ nnoremap [W <C-W>t
 nnoremap ]W <C-W>b
 " Faster preview window manipulation
 noremap <C-J> <C-W>z
+" Toggle undo window
+nnoremap <F3>u :GundoToggle<CR>
 
 " Don't block switching from hidden buffers
 set hidden
