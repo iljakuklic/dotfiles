@@ -52,7 +52,8 @@ augroup vimrc_lsp_init
     nmap <buffer> <F3>s <Plug>(lsp-signature-help)
     nmap <buffer> <F3>r <Plug>(lsp-references)
     nmap <buffer> <F3>R <Plug>(lsp-rename)
-    nmap <buffer> <F3>a <Plug>(lsp-code-action)
+    "nmap <buffer> <F3>a <Plug>(lsp-code-action)
+    nmap <buffer> <F3>a :LspCodeAction<CR>
     nmap <buffer> <F3>d <Plug>(lsp-peek-declaration)
     nmap <buffer> <F3>D <Plug>(lsp-declaration)
     nmap <buffer> <F3>f <Plug>(lsp-peek-definition)
