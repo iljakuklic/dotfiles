@@ -166,9 +166,12 @@ function prompt_command {
           ' ('*)
             GITINFO="${GITINFO#??}"
             case "$GITINFO" in
-              '('*'...')
+              '('*)
                 GITINFO="${GITINFO#?}"
-                BRANCH="$CBCYAN⌥$CDCYAN${GITINFO%...}" ;;
+                case "$GITINFO" in
+                  *'...') GITINFO="»${GITINFO%???}" ;;
+                esac
+                BRANCH="$CBCYANº$CDCYAN$GITINFO" ;;
               *) BRANCH="$CDCYAN$GITINFO" ;;
             esac
             break ;;
