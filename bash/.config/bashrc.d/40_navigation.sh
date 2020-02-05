@@ -1,12 +1,16 @@
 # Various enhancments to the standard cd and pushd/popd mechanisms.
 
 # ls-like aliases
+alias ls='ls --color=auto'
 alias ll='ls -lhA'
 alias lls='ll -S'
 if builtin type tree >/dev/null 2>&1; then
   alias lst=tree
   alias llt='tree -hpuD'
 fi
+
+# Enable colors
+type dircolors >/dev/null 2>&1 && eval "$(dircolors)"
 
 # Create a bunch of directories and move to the last one
 function mkcd {
