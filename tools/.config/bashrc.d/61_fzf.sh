@@ -72,12 +72,12 @@ if type fd >/dev/null 2>&1; then
 fi
 
 # Tweak the default settings
-export FZF_DEFAULT_OPTS="--multi --height=40% --reverse -1 -0 --tabstop=4"
+export FZF_DEFAULT_OPTS="--multi --height=40% --reverse --tabstop=4 -0"
 FZF_DEFAULT_OPTS+=" --prompt=' │ ' --color=prompt:0,hl:178,hl+:178"
 FZF_DEFAULT_OPTS+=" --bind='ctrl-t:toggle-all,ctrl-g:select-all+accept'"
 FZF_DEFAULT_OPTS+=" --bind='tab:down,shift-tab:up'"
 FZF_DEFAULT_OPTS+=" --bind='f2:toggle-preview,ctrl-space:toggle'"
-FZF_ALT_C_OPTS="--preview='_fzf_preview_fs {}'"
+FZF_ALT_C_OPTS="--preview='_fzf_preview_fs {}' -1 -0"
 
 # Bash history and completion
 export FZF_CTRL_R_OPTS=" --preview='echo {}' --preview-window=down:3:wrap"

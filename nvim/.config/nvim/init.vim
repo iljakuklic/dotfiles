@@ -10,6 +10,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug '/usr/share/doc/fzf/examples'
+Plug 'junegunn/fzf', { 'dir': '~/.local/share/vim-fzf' }
 Plug 'liuchengxu/vista.vim'
 Plug 'ajh17/vimcompletesme'
 Plug 'sjl/gundo.vim'
