@@ -9,6 +9,8 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug '/usr/share/doc/fzf/examples'
+Plug 'liuchengxu/vista.vim'
 Plug 'ajh17/vimcompletesme'
 Plug 'sjl/gundo.vim'
 Plug 'Superbil/llvm.vim'
@@ -131,6 +133,20 @@ nnoremap ]W <C-W>b
 noremap <C-J> <C-W>z
 " Toggle undo window
 nnoremap <F3>u :GundoToggle<CR>
+
+" Vista configuration
+nmap <F3><F3> :Vista!!<CR>
+nmap <F3>/ :Vista finder<CR>
+let g:vista_icon_indent = ["╰╼ ", "├╼ "]
+let g:vista_default_executive = 'vim_lsp'
+"let g:vista_fzf_preview = ['right:50%']
+let g:vista#renderer#icons = {
+\   "function": "∫",
+\   "variable": "∴",
+\   "field": "∴",
+\   "class": "∁",
+\   "property": "∴",
+\  }
 
 " Don't block switching from hidden buffers
 set hidden
