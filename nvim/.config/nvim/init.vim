@@ -1,20 +1,21 @@
 " Initialise plugins
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-characterize'
-Plug 'tpope/vim-tbone'
-Plug 'tpope/vim-unimpaired'
+Plug 'ajh17/vimcompletesme'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug '/usr/share/doc/fzf/examples'
 Plug 'junegunn/fzf', { 'dir': '~/.local/share/vim-fzf' }
 Plug 'liuchengxu/vista.vim'
-Plug 'ajh17/vimcompletesme'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
 Plug 'sjl/gundo.vim'
 Plug 'Superbil/llvm.vim'
+Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-tbone'
+Plug 'tpope/vim-unimpaired'
+Plug 'tsufeki/asyncomplete-fuzzy-match', { 'do': 'cargo build --release' }
+Plug '/usr/share/doc/fzf/examples'
 call plug#end()
 
 " Some colours
