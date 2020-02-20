@@ -1,11 +1,22 @@
 # useful git aliases
 [alias]
-	s = status
-	amend = commit --amend --no-edit
+  s = status
+  ap = add -p
+  unadd = reset HEAD --
+  ci = commit
+  ff = pull --ff-only
+  pr = pull --rebase
+  amend = commit --amend --no-edit
+  graph = log --graph --oneline
+  co = checkout
+  cob = checkout -b
+  d = diff
+  dc = diff --cached
+  aliases = config --get-regexp ^alias\\.
 
 # turn the colours on
 [color]
-	ui = auto
-	branch = auto
-	diff = auto
-	grep = auto
+  ui = auto
+  branch = auto
+  diff = auto
+  grep = auto
