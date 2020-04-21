@@ -16,6 +16,7 @@ Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
 Plug 'tsufeki/asyncomplete-fuzzy-match', { 'do': 'cargo build --release' }
 Plug '/usr/share/doc/fzf/examples'
+Plug 'ledger/vim-ledger'
 call plug#end()
 
 " Some colours
