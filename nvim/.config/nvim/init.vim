@@ -132,6 +132,15 @@ augroup vimrc_lsp_init
           \ })
   endif
 
+  " Setup LSP for Rust
+  if executable('rls')
+    au User lsp_setup call lsp#register_server({
+          \ 'name': 'rls',
+          \ 'cmd': {server_info->['rls']},
+          \ 'whitelist': ['rust'],
+          \ })
+  endif
+
 augroup end
 
 " Ctrl-L to clear search highlight
