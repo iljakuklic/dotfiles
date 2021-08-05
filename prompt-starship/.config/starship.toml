@@ -23,3 +23,9 @@ format = "[⌛︎$duration]($style) "
 
 [rust]
 disabled = true
+
+[nix_shell]
+format = "[$symbol$state ($name)]($style) "
+symbol = "❄️"
+pure_msg = ""
+impure_msg = "✖"
