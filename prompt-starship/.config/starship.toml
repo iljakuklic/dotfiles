@@ -25,7 +25,11 @@ format = "[⌛︎$duration]($style) "
 disabled = true
 
 [nix_shell]
-format = "[$symbol$state ($name)]($style) "
+format = "[$symbol$state( $name)]($style) "
 symbol = "❄️"
 pure_msg = ""
 impure_msg = "✖"
+
+[env_var.DIRENV_DIR]
+format = "[📂ENV]($style) "
+style = "bold green"
