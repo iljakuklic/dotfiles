@@ -14,7 +14,7 @@ Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
-Plug 'tsufeki/asyncomplete-fuzzy-match', { 'do': 'cargo build --release' }
+"Plug 'tsufeki/asyncomplete-fuzzy-match', { 'do': 'cargo build --release' }
 Plug '/usr/share/doc/fzf/examples'
 Plug 'ledger/vim-ledger'
 call plug#end()
@@ -30,7 +30,7 @@ let g:asyncomplete_auto_popup = 1
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 0
 let g:lsp_virtual_text_prefix = "◀ "
-"let g:lsp_highlight_references_enabled = 1
+let g:lsp_highlight_references_enabled = 1
 
 " Sign column style
 set signcolumn=yes
