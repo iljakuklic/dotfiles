@@ -31,35 +31,47 @@ function mkcd {
 
 # Move up the directory hierarchy
 function cdup {
-  case "$1" in
-    -h|--help)
-      echo "cdup: Move up the directory hierarchy"
-      echo
-      echo 'Usage:'
-      echo '  cdup       - Move to the parent directory'
-      echo '  cdup N     - Jump N directories up'
-      echo '  cdup DIR   - Jump up to particular directory (prefix is ok)'
-      echo '  cdup --git - Jump up to git top level directory'
-      ;;
-    --git) cd "$(git rev-parse --show-toplevel)" ;;
-    -*) echo "Unknown switch '$1'" >&2; return 1 ;;
-    '') cd .. ;;
-    /) cd / ;;
-    0) ;;
-    [1-9]|1[0-9]) cd $(printf "../%.0s" `seq $1`) ;;
-    *)
-      local PAT="${1#/}"
-      local DIR="$PWD"
-      while [ "$DIR" != '' ]; do
-        case "${DIR##*/}/" in
-          "$PAT"*) cd "$DIR"; return 0 ;;
-        esac
-        DIR="${DIR%/*}"
-      done
-      echo "Pattern '$PAT' not found in current path" >&2
-      return 1
-      ;;
-  esac
+  test "$#" = 0 && cd .. && return 0
+
+  local DIR="$PWD"
+  local TEST=(test 1)
+  local PAT=
+  while test "$#" -gt 0; do
+    case "$1" in
+      -h|--help)
+        echo "cdup: Move up the directory hierarchy"
+        echo
+        echo 'Usage:'
+        echo '  cdup                - Move to the parent directory'
+        echo '  cdup -N             - Jump N directories up'
+        echo '  cdup DIR            - Jump up to particular directory (prefix is ok)'
+        echo '  cdup --git          - Jump up to git top level directory'
+        echo '  cdup -[edfrwx] FILE - Jump up to directory matching a test (see help test)'
+        return 0
+        ;;
+      --git) TEST+=(-a -d .git) ;;
+      /) cd /; return "$?" ;;
+      -0) ;;
+      -[0-9]|-[12][0-9]) for i in `seq ${1:1}`; do DIR="${DIR%/*}"; done ;;
+      -[edfLrwxOG]) TEST+=(-a "$1" "$2"); shift ;;
+      -a) ;;
+      -o) TEST+=("$1") ;;
+      -) cd -; return "$?" ;;
+      -*) echo "Unknown switch '$1'" >&2; return 1 ;;
+      *) PAT="${1#/}" ;;
+    esac
+    shift
+  done
+
+  while [ "$DIR" != '' ]; do
+    case "${DIR##*/}/" in
+      "$PAT"*) (cd "$DIR" && "${TEST[@]}") && { cd "$DIR"; return "$?"; } ;;
+    esac
+    DIR="${DIR%/*}"
+  done
+
+  echo "Could not find matching directory" >&2
+  return 1
 }
 
 # Alias .. to cdup
@@ -67,6 +79,6 @@ alias ..=cdup
 
 # Completion for cdup
 function _complete_cdup {
-  readarray -t COMPREPLY <<<"$(IFS=/ compgen -W "$PWD/--git" -- "$2")"
+  readarray -t COMPREPLY <<<"$(IFS=/ compgen -W "$PWD" -- "$2")"
 }
 complete -F _complete_cdup cdup ..
