@@ -1,13 +1,15 @@
 # Various enhancments to the standard cd and pushd/popd mechanisms.
 
-# ls-like aliases
-alias ls='ls --color=auto'
-alias ll='ls -lhA'
-alias lls='ll -S'
-if builtin type tree >/dev/null 2>&1; then
-  alias lst=tree
-  alias llt='tree -hpuD'
+# Use exa for ls if available
+if builtin type exa >/dev/null; then
+  alias ls='exa'
+  alias lst='ls -T'
+  alias llt='ll -T'
 fi
+
+# ls-like aliases
+alias ll='ls -lha'
+alias lls='ll --sort=size'
 
 # Enable colors
 type dircolors >/dev/null 2>&1 && eval "$(dircolors)"
