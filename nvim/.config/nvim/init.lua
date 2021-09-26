@@ -8,7 +8,7 @@ if fn.empty(fn.glob(packer_path)) > 0 then
   vim.cmd 'packadd packer.nvim'
 end
 
-local treesitter_filetypes = { 'bash', 'c', 'cpp', 'json', 'json5', 'ledger', 'lua', 'nix', 'rust' }
+local treesitter_filetypes = { 'bash', 'c', 'cpp', 'json', 'ledger', 'lua', 'nix', 'rust' }
 
 -- Add some packages
 require('packer').startup(function()
@@ -47,12 +47,13 @@ vim.cmd('colorscheme codedark')
 vim.cmd('au ColorScheme * hi Normal ctermbg=none')
 vim.cmd('au ColorScheme * hi EndOfBuffer ctermbg=none')
 vim.cmd('au ColorScheme * hi NonText ctermbg=none')
+vim.g.markdown_fenced_languages = { 'c', 'cpp', 'rust', 'sh' }
 
 -- Treesitter
+vim.cmd('packadd nvim-treesitter')
 require('nvim-treesitter.configs').setup {
     ensure_installed = treesitter_filetypes,
     highlight = {enable = true},
-    indent = {enable = true},
     incremental_selection = {
         enable = true,
         keymaps = {
@@ -63,8 +64,6 @@ require('nvim-treesitter.configs').setup {
         }
     },
 }
-
--- TODO add to a status line plugin and set up fonts
 
 -- Status line
 nvim_gps = require('nvim-gps')
