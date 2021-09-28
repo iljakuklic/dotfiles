@@ -15,6 +15,7 @@ require('packer').startup(function()
     use 'tomasiser/vim-code-dark'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'SmiteshP/nvim-gps', requires = 'nvim-treesitter/nvim-treesitter' }
+    use { 'nvim-treesitter/playground', requires = 'nvim-treesitter/nvim-treesitter', cmd = 'TSPlaygroundToggle' }
     use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
 end)
 
@@ -59,6 +60,10 @@ require('nvim-treesitter.configs').setup {
             node_decremental = "]n",
             scope_incremental = "[N",
         }
+    },
+    playground = {
+        enable = true,
+        persist_queries = true,
     },
 }
 
