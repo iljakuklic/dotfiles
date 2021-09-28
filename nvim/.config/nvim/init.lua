@@ -41,7 +41,7 @@ vim.o.wildmenu = true
 vim.o.number = true
 vim.o.signcolumn = 'yes'
 vim.wo.list = true
-vim.o.listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±,trail:…'
+vim.o.listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:␣,trail:·'
 vim.o.colorcolumn = '+1'
 
 -- Colours
