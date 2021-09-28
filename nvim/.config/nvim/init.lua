@@ -15,6 +15,7 @@ require('packer').startup(function()
     use 'tomasiser/vim-code-dark'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'SmiteshP/nvim-gps', requires = 'nvim-treesitter/nvim-treesitter' }
+    use { 'nvim-treesitter/nvim-treesitter-textobjects', requires = 'nvim-treesitter/nvim-treesitter' }
     use { 'nvim-treesitter/playground', requires = 'nvim-treesitter/nvim-treesitter', cmd = 'TSPlaygroundToggle' }
     use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
 end)
@@ -64,6 +65,18 @@ require('nvim-treesitter.configs').setup {
     playground = {
         enable = true,
         persist_queries = true,
+    },
+    textobjects = {
+        select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+            },
+        },
     },
 }
 
