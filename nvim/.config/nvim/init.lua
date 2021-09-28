@@ -1,10 +1,7 @@
--- Aliases
-fn = vim.fn
-
 -- Set up package manager
-local packer_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(packer_path)) > 0 then
-  fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', packer_path})
+local packer_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if vim.fn.isdirectory(packer_path) then
+  vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', packer_path})
   vim.cmd 'packadd packer.nvim'
 end
 
