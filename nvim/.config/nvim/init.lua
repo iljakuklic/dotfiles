@@ -21,11 +21,11 @@ require('packer').startup(function()
 end)
 
 -- Editing
-vim.o.expandtab = true
-vim.o.tabstop = 4
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
-vim.o.smartindent = true
+vim.bo.expandtab = true
+vim.bo.tabstop = 4
+vim.bo.softtabstop = 4
+vim.bo.shiftwidth = 4
+vim.bo.smartindent = true
 vim.o.history = 1000
 
 -- Search
