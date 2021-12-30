@@ -1,0 +1,26 @@
+# Initialize the plugn manager
+evaluate-commands %sh{
+    plugins="$kak_config/plugins"
+    mkdir -p "$plugins"
+    [ ! -e "$plugins/plug.kak" ] && \
+        git clone -q https://github.com/andreyorst/plug.kak.git "$plugins/plug.kak"
+    printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
+}
+plug "andreyorst/plug.kak" noload
+
+# Set up LSP
+plug "kak-lsp/kak-lsp" do %{
+    cargo build --locked --force --path .
+} config %{
+    set global lsp_cmd "%val{config}/plugins/kak-lsp/target/release/kak-lsp --config %val{config}/lsp.toml -vvv --log %val{config}/lsp.log --session %val{session}"
+
+    hook global WinSetOption filetype=(c|cpp|cc|rust) %{
+        set-option window lsp_auto_highlight_references true
+        set-option window lsp_hover_anchor false
+        lsp-auto-hover-enable
+        echo -debug "Enabling LSP for filtetype %opt{filetype}"
+        lsp-enable-window
+    }
+
+    hook global KakEnd .* lsp-exit
+}
