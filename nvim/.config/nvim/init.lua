@@ -26,6 +26,13 @@ require('packer').startup(function()
     use 'simrat39/rust-tools.nvim'
 end)
 
+-- Utility functions
+
+function keymap(mode, key, cmd)
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_set_keymap(mode, key, cmd, opts)
+end
+
 -- Editing
 vim.bo.expandtab = true
 vim.bo.tabstop = 4
@@ -108,51 +115,43 @@ cmp.setup({
     }),
 })
 
--- Language servers
+-- Language server
 local nvim_lsp = require('lspconfig')
 
-local on_lsp_attach = function(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-    -- Enable completion triggered by <c-x><c-o>
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- Mapping opts
-    local opts = { noremap = true, silent = true }
-
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<leader>n', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-end
-
--- LSP configuration options
 local lsp_config = {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-    on_attach = on_lsp_attach,
+    on_attach = function(client, bufnr)
+        -- Enable completion triggered by <c-x><c-o>
+        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    end,
     --standalone = true,
     flags = { debounce_text_changes = 150 },
 }
 
---nvim_lsp.rust_analyzer.setup(lsp_config)
+-- Set up servers
 require('rust-tools').setup({
     tools = {},
     server = lsp_config,
 })
 
 -- Key bindings
-keymap = vim.api.nvim_set_keymap
-keymap('n', '<C-l>', ':nohlsearch<CR><C-l>', {noremap = true, silent = true})
+-- General
+keymap('n', '<C-l>', ':nohlsearch<CR><C-l>')
+-- LSP jumps
+keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
+-- LSP help
+keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+keymap('i', '<C-k>', '<C-o><cmd>lua vim.lsp.buf.signature_help()<CR>')
+keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
+-- LSP commands
+keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
+keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
+keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
+keymap('n', '<leader>n', '<cmd>lua vim.lsp.buf.rename()<CR>')
+keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
