@@ -130,7 +130,13 @@ local lsp_config = {
 
 -- Set up servers
 require('rust-tools').setup({
-    tools = {},
+    tools = {
+        inlay_hints = {
+            show_parameter_hints = false,
+            other_hints_prefix = ": ",
+            highlight = 'NonText',
+        },
+    },
     server = lsp_config,
 })
 
