@@ -7,14 +7,22 @@ end
 
 -- Add some packages
 require('packer').startup(function()
+    -- Package management
     use 'wbthomason/packer.nvim'
-    use 'editorconfig/editorconfig-vim'
+
+    -- UI
     use 'tomasiser/vim-code-dark'
-    use { 'SmiteshP/nvim-gps', requires = 'nvim-treesitter/nvim-treesitter' }
     use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
-    use { 'neovim/nvim-lspconfig' }
-    use 'hrsh7th/cmp-nvim-lsp'
+
+    -- General editing
+    use 'editorconfig/editorconfig-vim'
+    use 'L3MON4D3/LuaSnip'
     use 'hrsh7th/nvim-cmp'
+    use 'saadparwaiz1/cmp_luasnip'
+    use 'neovim/nvim-lspconfig'
+    use 'hrsh7th/cmp-nvim-lsp'
+
+    -- Language support
     use 'simrat39/rust-tools.nvim'
 end)
 
@@ -51,51 +59,53 @@ vim.cmd('au ColorScheme * hi Normal ctermbg=none')
 vim.cmd('au ColorScheme * hi EndOfBuffer ctermbg=none')
 vim.cmd('au ColorScheme * hi NonText ctermbg=none')
 
+-- Snippets
+local luasnip = require('luasnip')
+
 -- Completion
 local cmp = require('cmp')
 
 cmp.setup({
     snippet = {
-        -- REQUIRED - you must specify a snippet engine
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-            -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            luasnip.lsp_expand(args.body)
         end,
     },
     mapping = {
         ['<C-Up>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-Down>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-        -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ['<C-e>'] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        }),
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            --elseif luasnip.expand_or_jumpable() then
-            --    luasnip.expand_or_jump()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
             else
                 fallback()
             end
-        end, { "i", "s" }),
+        end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            --elseif luasnip.jumpable(-1) then
-            --    luasnip.jump(-1)
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
-        end, { "i", "s" }),
+        end, { 'i', 's' }),
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-    }, {
-        --{ name = 'buffer' },
-    })
+        { name = 'luasnip' },
+    }),
 })
 
 -- Language servers
