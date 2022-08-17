@@ -10,6 +10,11 @@ show_always = true
 disabled = false
 map_symbol = true
 
+[jobs]
+symbol = "▸"
+number_threshold = 1
+symbol_threshold = 1
+
 [time]
 disabled = false
 format = "[$time]($style) "
