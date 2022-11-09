@@ -36,5 +36,5 @@ pure_msg = ""
 impure_msg = "✖"
 
 [env_var.DIRENV_DIR]
-format = "[📂ENV]($style) "
+format = "[ENV]($style) "
 style = "bold green"
