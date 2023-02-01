@@ -119,7 +119,6 @@ cmp.setup({
 local nvim_lsp = require('lspconfig')
 
 local lsp_config = {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     on_attach = function(client, bufnr)
         -- Enable completion triggered by <c-x><c-o>
         vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -139,6 +138,8 @@ require('rust-tools').setup({
     },
     server = lsp_config,
 })
+
+nvim_lsp.nil_ls.setup({})
 
 -- Key bindings
 -- General
@@ -160,4 +161,4 @@ keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
 keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
 keymap('n', '<leader>n', '<cmd>lua vim.lsp.buf.rename()<CR>')
 keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format { async = true }<CR>')
