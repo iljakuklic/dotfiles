@@ -42,6 +42,7 @@ vim.bo.smartindent = true
 vim.o.history = 1000
 vim.o.undofile = true
 vim.o.undodir = vim.fn.stdpath('data')..'/undo'
+vim.o.spell = true
 
 -- Search
 vim.o.ignorecase = true
