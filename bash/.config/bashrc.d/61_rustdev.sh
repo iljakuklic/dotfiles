@@ -1,8 +1,14 @@
 # Rust development configuration
 
-if [ -f ~/.cargo/env ]; then
+if [ -d ~/.cargo ]; then
   # Setup PATH
-  source ~/.cargo/env
+  [ -f ~/.cargo/env ] && source ~/.cargo/env
+
+  # If the above fails, try adding bin manually
+  case ":$PATH:" in
+    *":$HOME/.cargo/.bin:"*) ;;
+    *) PATH="$HOME/.cargo/bin:$PATH" ;;
+  esac
 
   # Rustup completions
   source <(rustup completions bash)
