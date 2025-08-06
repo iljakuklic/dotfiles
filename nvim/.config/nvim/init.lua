@@ -31,9 +31,13 @@ end)
 
 -- Utility functions
 
-function keymap(mode, key, cmd)
+local function keymap(mode, key, cmd)
     local opts = { noremap = true, silent = true }
     vim.api.nvim_set_keymap(mode, key, cmd, opts)
+end
+
+local function load_json_config(path)
+  return vim.fn.json_decode(table.concat(vim.fn.readfile(path), "\n"))
 end
 
 -- Editing
@@ -119,9 +123,6 @@ cmp.setup({
     }),
 })
 
--- Language server
-local nvim_lsp = require('lspconfig')
-
 local lsp_config = {
     on_attach = function(client, bufnr)
         -- Enable completion triggered by <c-x><c-o>
@@ -143,7 +144,13 @@ require('rust-tools').setup({
     server = lsp_config,
 })
 
-nvim_lsp.nil_ls.setup({})
+-- LSP AI
+vim.lsp.config('lsp_ai', {
+    root_markers = { '.git' },
+    filetypes = { 'rust' },
+    init_options = load_json_config(vim.fn.stdpath("config") .. "/lsp-ai.json"),
+})
+vim.lsp.enable('lsp_ai')
 
 -- Key bindings
 
