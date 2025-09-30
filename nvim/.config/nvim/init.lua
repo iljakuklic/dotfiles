@@ -1,33 +1,36 @@
 -- Set up package manager
-local packer_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if vim.fn.isdirectory(packer_path) then
-  vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', packer_path})
-  vim.cmd 'packadd packer.nvim'
+local pckr_path = vim.fn.stdpath('data')..'/pckr/pckr.nvim'
+if not (vim.uv or vim.loop).fs_stat(pckr_path) then
+  vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/lewis6991/pckr.nvim', pckr_path})
 end
+vim.opt.rtp:prepend(pckr_path)
 
 -- Add some packages
-require('packer').startup(function()
+require('pckr').add {
     -- Package management
-    use 'wbthomason/packer.nvim'
+    'wbthomason/packer.nvim';
 
     -- UI
-    use 'tomasiser/vim-code-dark'
-    use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
-    use { 'nvim-telescope/telescope.nvim', tag = '0.1.8', requires = {
-        'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep', 'nvim-tree/nvim-web-devicons'
-    } }
+    'tomasiser/vim-code-dark';
+    { 'hoob3rt/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    };
+    { 'nvim-telescope/telescope.nvim',
+        tag = '0.1.8',
+        requires = {'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep', 'nvim-tree/nvim-web-devicons'}
+    };
 
     -- General editing
-    use 'editorconfig/editorconfig-vim'
-    use 'L3MON4D3/LuaSnip'
-    use 'hrsh7th/nvim-cmp'
-    use 'saadparwaiz1/cmp_luasnip'
-    use 'neovim/nvim-lspconfig'
-    use 'hrsh7th/cmp-nvim-lsp'
+    'editorconfig/editorconfig-vim';
+    'L3MON4D3/LuaSnip';
+    'hrsh7th/nvim-cmp';
+    'saadparwaiz1/cmp_luasnip';
+    'neovim/nvim-lspconfig';
+    'hrsh7th/cmp-nvim-lsp';
 
     -- Language support
-    use 'simrat39/rust-tools.nvim'
-end)
+    'simrat39/rust-tools.nvim',
+}
 
 -- Utility functions
 
