@@ -5,6 +5,7 @@ require('pckr').add {
 
     -- UI
     'tomasiser/vim-code-dark';
+    --'folke/which-key.nvim'; -- TODO configure
     { 'hoob3rt/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     };
@@ -15,13 +16,8 @@ require('pckr').add {
 
     -- General editing
     'editorconfig/editorconfig-vim';
-    'L3MON4D3/LuaSnip';
     'hrsh7th/nvim-cmp';
-    'saadparwaiz1/cmp_luasnip';
     'neovim/nvim-lspconfig';
     'hrsh7th/cmp-nvim-lsp';
-
-    -- Language support
-    'simrat39/rust-tools.nvim',
 }
 
