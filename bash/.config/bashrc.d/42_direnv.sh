@@ -1,4 +1,2 @@
 # Initialise direnv
-if builtin type direnv >/dev/null 2>&1; then
-  eval "$(direnv hook bash)"
-fi
+iscmd --warn direnv --eval hook bash

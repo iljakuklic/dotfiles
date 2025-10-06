@@ -1,4 +1,2 @@
-# Check github command
-if builtin type gh >/dev/null 2>&1; then
-    eval "$(gh completion -s bash)"
-fi
+# Check github command, set up completions if present
+iscmd gh --eval completion -s bash

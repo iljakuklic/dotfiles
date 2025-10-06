@@ -1,7 +1,7 @@
 # Various enhancments to the standard cd and pushd/popd mechanisms.
 
 # Use exa for ls if available
-if builtin type exa >/dev/null 2>&1; then
+if iscmd exa; then
   alias ls='exa'
   alias lst='ls -T'
   alias llt='ll -T'
