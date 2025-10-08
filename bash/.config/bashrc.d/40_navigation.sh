@@ -12,7 +12,7 @@ alias ll='ls -lha'
 alias lls='ll --sort=size'
 
 # Enable colors
-type dircolors >/dev/null 2>&1 && eval "$(dircolors)"
+iscmd --warn dircolors --eval
 
 # Create a bunch of directories and move to the last one
 function mkcd {
