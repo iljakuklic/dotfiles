@@ -21,7 +21,7 @@ function iscmd {
     local COMMAND="$1"
     shift
 
-    if !builtin type "$COMMAND" >/dev/null 2>&1; then
+    if ! builtin type "$COMMAND" >/dev/null 2>&1; then
         $WARN && echo "WARNING: '$COMMAND' not found" >&2
         return 127
     fi
@@ -31,7 +31,7 @@ function iscmd {
     case "$OPERATION" in
         '') ;;
         '--run') "$COMMAND" "$@";;
-        '--eval') eval "$("$COMMAND" "$@")";;
+        '--eval') source <("$COMMAND" "$@");;
         '--exec') exec "$COMMAND" "$@";;
         *) echo "Unknown operation '$OPERATION'" >&2; return 128;;
     esac

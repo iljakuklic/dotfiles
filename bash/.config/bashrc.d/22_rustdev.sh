@@ -6,7 +6,7 @@ if [ -d ~/.cargo ]; then
 
   # If the above fails, try adding bin manually
   case ":$PATH:" in
-    *":$HOME/.cargo/.bin:"*) ;;
+    *":$HOME/.cargo/bin:"*) ;;
     *) PATH="$HOME/.cargo/bin:$PATH" ;;
   esac
 
