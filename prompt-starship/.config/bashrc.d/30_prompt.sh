@@ -1,1 +1,1 @@
-eval "$(starship init bash)"
+iscmd --warn starship --eval init bash

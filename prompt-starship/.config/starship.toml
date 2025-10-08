@@ -26,9 +26,6 @@ min_time = 500
 show_milliseconds = true
 format = "[⌛︎$duration]($style) "
 
-[rust]
-disabled = true
-
 [nix_shell]
 format = "[$symbol$state( $name)]($style) "
 symbol = "❄️"
@@ -38,3 +35,185 @@ impure_msg = "✖"
 [env_var.DIRENV_DIR]
 format = "[ENV]($style) "
 style = "bold green"
+
+# No runtime versions
+[bun]
+disabled = true
+format = "[$symbol]($style)"
+
+[buf]
+disabled = true
+format = "[$symbol]($style)"
+
+[cmake]
+disabled = true
+format = "[$symbol]($style)"
+
+[cobol]
+disabled = true
+format = "[$symbol]($style)"
+
+[crystal]
+disabled = true
+format = "[$symbol]($style)"
+
+[daml]
+disabled = true
+format = "[$symbol]($style)"
+
+[dart]
+disabled = true
+format = "[$symbol]($style)"
+
+[deno]
+disabled = true
+format = "[$symbol]($style)"
+
+[dotnet]
+disabled = true
+format = "[$symbol(🎯 $tfm )]($style)"
+
+[elixir]
+disabled = true
+format = '[$symbol]($style)'
+
+[elm]
+disabled = true
+format = '[$symbol]($style)'
+
+[erlang]
+disabled = true
+format = '[$symbol]($style)'
+
+[fennel]
+disabled = true
+format = '[$symbol]($style)'
+
+[gleam]
+disabled = true
+format = '[$symbol]($style)'
+
+[golang]
+disabled = true
+format = '[$symbol]($style)'
+
+[gradle]
+disabled = true
+format = '[$symbol]($style)'
+
+[haxe]
+disabled = true
+format = '[$symbol]($style)'
+
+[helm]
+disabled = true
+format = '[$symbol]($style)'
+
+[java]
+disabled = true
+format = '[$symbol]($style)'
+
+[julia]
+disabled = true
+format = '[$symbol]($style)'
+
+[kotlin]
+disabled = true
+format = '[$symbol]($style)'
+
+[lua]
+disabled = true
+format = '[$symbol]($style)'
+
+[meson]
+disabled = true
+format = '[$symbol]($style)'
+
+[nim]
+disabled = true
+format = '[$symbol]($style)'
+
+[nodejs]
+disabled = true
+format = '[$symbol]($style) '
+symbol = 'js'
+
+[ocaml]
+disabled = true
+format = '[$symbol(\($switch_indicator$switch_name\) )]($style)'
+
+[opa]
+disabled = true
+format = '[$symbol]($style)'
+
+[perl]
+disabled = true
+format = '[$symbol]($style)'
+
+[pixi]
+disabled = true
+format = '[$symbol($environment )]($style)'
+
+[php]
+disabled = true
+format = '[$symbol]($style)'
+
+[pulumi]
+disabled = true
+format = '[$symbol$stack]($style)'
+
+[purescript]
+disabled = true
+format = '[$symbol]($style)'
+
+[python]
+disabled = true
+format = '[$symbol]($style)'
+
+[quarto]
+disabled = true
+format = '[$symbol]($style)'
+
+[raku]
+disabled = true
+format = '[$symbol]($style)'
+
+[red]
+disabled = true
+format = '[$symbol]($style)'
+
+[rlang]
+disabled = true
+format = '[$symbol]($style)'
+
+[ruby]
+disabled = true
+format = '[$symbol]($style)'
+
+[rust]
+disabled = true
+format = '[$symbol]($style)'
+
+[solidity]
+disabled = true
+format = '[$symbol]($style)'
+
+[typst]
+disabled = true
+format = '[$symbol]($style)'
+
+[swift]
+disabled = true
+format = '[$symbol]($style)'
+
+[vagrant]
+disabled = true
+format = '[$symbol]($style)'
+
+[vlang]
+disabled = true
+format = '[$symbol]($style)'
+
+[zig]
+disabled = true
+format = '[$symbol]($style)'
