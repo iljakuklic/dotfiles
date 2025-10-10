@@ -11,7 +11,7 @@ if [ -d ~/.cargo ]; then
   esac
 
   # Rustup completions
-  source <(rustup completions bash)
+  iscmd --warn rustup --eval completions bash
 
   # Try locate bash completions for cargo
   CARGO_COMPLETIONS=(~/.cargo/git/checkouts/cargo-*/*/src/etc/cargo.bashcomp.sh)
