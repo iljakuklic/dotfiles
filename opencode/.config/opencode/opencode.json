@@ -1,0 +1,30 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "nanogpt": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "NanoGPT",
+      "options": {
+        "baseURL": "https://nano-gpt.com/api/v1"
+      },
+      "models": {
+        "deepseek-ai/deepseek-v3.2-exp": {
+          "name": "DeepSeek 3.2 Exp",
+          "cost": { "input": 0.28, "output": 0.42 }
+        },
+        "zai-org/GLM-4.5-Air": {
+          "name": "GLM 4.5 Air",
+          "cost": { "input": 0.1, "output": 0.1 }
+        },
+        "z-ai/glm-4.6": {
+          "name": "GLM 4.6",
+          "cost": { "input": 0.4, "output": 1.5 }
+        },
+        "qwen/qwen3-coder": {
+          "name": "Qwen 3 Coder",
+          "cost": { "input": 0.13, "output": 0.5 }
+        }
+      }
+    }
+  }
+}
