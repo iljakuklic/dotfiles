@@ -1,9 +1,8 @@
---ignore (CVS|_darcs)
---ignore \.(svn|git|hg|cvsdarcs).*
+--ignore ^\.git.*
 --ignore \..*.swp|.*~|.*\.bak
 --ignore (README|LICENSE|TODO|HACKING)(\..*)?
 --ignore .*\.pyc
 --ignore \.stow.*
 --ignore .directory
 --no-folding
--v -R
+-v
