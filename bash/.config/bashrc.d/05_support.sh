@@ -14,7 +14,9 @@ function iscmd {
     local WARN=false
 
     if [ "$1" = '--warn' ]; then
-        WARN=true
+        if ! grep 'VARIANT="Silverblue"' /etc/os-release >/dev/null 2>&1; then
+            WARN=true
+        fi
         shift
     fi
 
