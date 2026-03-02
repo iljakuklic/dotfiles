@@ -10,7 +10,9 @@
         "git log": "allow",
         "git log *": "allow",
         "cargo check": "allow",
-        "cargo check *": "allow"
+        "cargo check *": "allow",
+        "cargo test": "allow",
+        "cargo test *": "allow"
     },
     "read": "allow",
     "grep": "allow",
@@ -24,43 +26,10 @@
     "question": "allow"
   },
   "provider": {
-    "nanogpt": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "NanoGPT",
-      "options": {
-        "baseURL": "https://nano-gpt.com/api/v1"
-      },
+    "NanoGPT": {
       "models": {
-        "deepseek/deepseek-v3.2": {
-          "name": "DeepSeek v3.2",
-          "cost": { "input": 0.28, "output": 0.42 },
-          "limit": { "context": 163000, "output": 163000 }
-        },
-        "z-ai/glm-4.7": {
-          "name": "GLM 4.7",
-          "cost": { "input": 0.15, "output": 0.80 },
-          "limit": { "context": 200000, "output": 200000 }
-        },
-        "z-ai/glm-4.7-flash": {
-          "name": "GLM 4.7 Flash",
-          "cost": { "input": 0.07, "output": 0.40 },
-          "limit": { "context": 200000, "output": 200000 }
-        },
-        "z-ai/glm-4.7:thinking": {
-          "name": "GLM 4.7 Thinking",
-          "cost": { "input": 0.15, "output": 0.80 },
-          "limit": { "context": 200000, "output": 200000 }
-        },
-        "zai-org/GLM-4.5-Air": {
-          "name": "GLM 4.5 Air",
-          "cost": { "input": 0.10, "output": 0.10 },
-          "limit": { "context": 128000, "output": 128000 }
-        },
-        "qwen/qwen3-coder": {
-          "name": "Qwen 3 Coder",
-          "cost": { "input": 0.13, "output": 0.50 },
-          "limit": { "context": 262000, "output": 262000 }
-        }
+        "anthropic/claude-sonnet-4.6": {},
+        "claude-haiku-4-5-20251001": {}
       }
     }
   }
