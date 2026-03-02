@@ -4,3 +4,4 @@
 .directory
 !*/.*
 *.old
+.opencode/skills/nanogpt-models/nanogpt-models.json
