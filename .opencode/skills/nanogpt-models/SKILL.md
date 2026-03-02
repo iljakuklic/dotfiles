@@ -9,9 +9,8 @@ compatibility: opencode
 Manage the list of available nanogpt models in opencode's configuration. When requested, I will:
 
 1. Run the fetch script to get the latest models from nanogpt API
-2. Format the output using jq into the opencode config format
-3. Update the nanogpt-models.json file with the new model list
-4. Merge the models into opencode.json under provider.NanoGPT.models
+2. Save the model list to nanogpt-models.json
+3. Merge the models into opencode.json under provider.NanoGPT.models
 
 ## When to use me
 
@@ -24,19 +23,22 @@ Use this when you need to update the nanogpt models list in opencode config, eit
 
 ### Step 1: Fetch models from API
 
-Run the fetch script with the --opencode flag to get properly formatted output:
-
 ```bash
-./fetch.sh --opencode
+./fetch.sh --opencode > nanogpt-models.json
 ```
 
-### Step 2: Process with jq
+This produces a single object with model IDs as keys:
+```json
+{
+  "model-id": { "name": "...", "cost": {...}, "limit": {...} },
+  ...
+}
+```
 
-The fetch script outputs an array of objects. Use jq to convert to opencode format:
+### Step 2: Look up specific models
 
 ```bash
-# Merge all model objects into a single object
-jq -s 'add' nanogpt-models.json
+jq '."claude-sonnet-4-5-20250929"' nanogpt-models.json
 ```
 
 ### Step 3: Update opencode.json
@@ -57,24 +59,9 @@ The opencode config expects models in this format:
 }
 ```
 
-Key points:
-- Model ID is the key (e.g., "deepseek/deepseek-v3.2")
-- cost.input and cost.output are prices per million tokens
-- limit.context and limit.output are token limits
-- The fetch script's --opencode flag already produces the correct structure
-
-### Step 4: Update nanogpt-models.json
-
-Save the fetched model list to nanogpt-models.json for future reference:
+Merge the fetched models into opencode.json:
 
 ```bash
-./fetch.sh --opencode > nanogpt-models.json
-```
-
-Then merge into opencode.json using jq:
-
-```bash
-jq --argjson models "$(cat nanogpt-models.json)" \
-   '.provider.NanoGPT.models = $models' \
+jq --argfile models nanogpt-models.json '.provider.NanoGPT.models = $models' \
    opencode.json > opencode.json.tmp && mv opencode.json.tmp opencode.json
 ```

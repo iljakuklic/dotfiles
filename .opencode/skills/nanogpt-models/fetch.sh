@@ -15,13 +15,14 @@ read -r -d '' OPENCODE << EOF
 EOF
 
 FORMAT="."
+OUTPUT="[ .data.[] | $FORMAT ]"
 
 while [ $# -gt 0 ]; do
     case "$1" in
         -i|--input) FETCH_CMD=(cat "$2"); shift 2;;
-        --opencode) FORMAT="$OPENCODE"; shift;;
+        --opencode) FORMAT="$OPENCODE"; OUTPUT="[ .data.[] | $FORMAT ] | add"; shift;;
         *) echo "Bad argument: $1" >&2; exit 1;;
     esac
 done
 
-"${FETCH_CMD[@]}" | jq "[ .data.[] | $FORMAT ]"
+"${FETCH_CMD[@]}" | jq "$OUTPUT"
