@@ -27,6 +27,10 @@
   },
   "provider": {
     "NanoGPT": {
+      "name": "NanoGPT Custom",
+      "options": {
+        "baseURL": "https://nano-gpt.com/api/v1"
+      },
       "models": {
         "anthropic/claude-sonnet-4.6": {
           "name": "Claude Sonnet 4.6",
