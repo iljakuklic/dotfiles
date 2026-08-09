@@ -5,6 +5,9 @@ end
 -- Rust
 vim.lsp.enable('rust_analyzer')
 
+-- Haskell
+vim.lsp.enable("hls")
+
 -- LSP AI
 vim.lsp.config('lsp_ai', {
     root_markers = { '.git' },
