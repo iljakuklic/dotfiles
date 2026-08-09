@@ -9,3 +9,4 @@ fi
 for SCRIPT in ~/.config/bashrc.d/*.sh; do
   source "$SCRIPT"
 done
+. "$HOME/.cargo/env"
